@@ -7,12 +7,12 @@ using DominikStiller.VertretungsplanServer.Web.Controllers;
 
 namespace DominikStiller.VertretungsplanServer.Web.Helper
 {
-    internal class VertretungsplanHelper
+    class VertretungsplanHelper
     {
-        internal const string DATEFORMAT_INTERNAL = "yyyy-MM-dd";
-        internal const string DATEFORMAT_PUBLIC = "dddd, dd.MM";
+        const string DATEFORMAT_INTERNAL = "yyyy-MM-dd";
+        const string DATEFORMAT_PUBLIC = "dddd, dd.MM";
 
-        internal static VertretungsplanViewModel GenerateViewModel(VertretungsplanRepository vertretungsplanRepository, VertretungsplanType type, DateTime? date = null)
+        public static VertretungsplanViewModel GenerateViewModel(VertretungsplanRepository vertretungsplanRepository, VertretungsplanType type, DateTime? date = null)
         {
             var model = new VertretungsplanViewModel();
             var vertretungsplan = vertretungsplanRepository.FindNearest(date ?? DateTime.Now);
@@ -68,7 +68,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
             return model;
         }
 
-        internal static string TimespanInWords(TimeSpan timespan)
+        static string TimespanInWords(TimeSpan timespan)
         {
             if (timespan.TotalDays >= 1)
             {
@@ -84,7 +84,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
             }
         }
 
-        private static string FormatTimespan(double quantity, string singular, string plural)
+        static string FormatTimespan(double quantity, string singular, string plural)
         {
             return String.Format("{0} {1}", Math.Floor(quantity), quantity < 2 ? singular : plural);
         }
