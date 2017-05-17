@@ -1,0 +1,62 @@
+// main: ../main.scss
+// min-width: 0px
+
+body {
+   font-size: 14px;
+}
+
+main,
+footer {
+   padding: 0 1em;
+}
+
+main {
+   margin-top: 2em;
+}
+
+#guslogo {
+   display: none;
+}
+
+#dateselector-container {
+   margin-bottom: 2em;
+   // Compensate for #previousdate padding
+   margin-left: -1rem;
+
+   #dateselector {
+      font-size: 7vw;
+      background-color: #ccc;
+      padding: 3px 15px 10px;
+
+      option {
+         background-color: #ccc;
+      }
+   }
+
+   #previousdate,
+   #nextdate {
+      font-size: 12vw;
+      // For larger touchable area
+      padding: 0 1rem;
+   }
+}
+
+#data {
+   overflow-x: scroll;
+
+   th {
+      padding: 10px;
+   }
+
+   td {
+      padding: 5px 10px;
+   }
+}
+
+footer {
+   margin-bottom: 1.5em;
+}
+
+#nodata div {
+   font-size: 2rem;
+}

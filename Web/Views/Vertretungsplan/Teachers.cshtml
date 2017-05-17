@@ -1,0 +1,118 @@
+﻿@model DominikStiller.VertretungsplanServer.Web.Controllers.VertretungsplanViewModel
+
+@{
+    ViewData["Title"] = "Vertretungsplan für Lehrer";
+
+    var Vertretungsplan = Model.Vertretungsplan;
+}
+
+@if (Vertretungsplan != null)
+{
+    @section Scripts {
+        <script>
+            var type = "teachers";
+            @{ var jsDates = Model.Dates.Select(d => String.Format("\"{0}\"", d)); }
+            var dates = [@Html.Raw(String.Join(", ", jsDates))];
+        </script>
+    }
+
+    <header>
+        <div id="dateselector-container">
+            <a id="previousdate" title="@Model.PreviousDate.ToString(Model.DateformatPublic)" data-date="@Model.PreviousDate.ToString(Model.DateformatInternal)">&lsaquo;</a>
+            <select asp-items="@Model.DateSelectorItems" id="dateselector"></select>
+            <a id="nextdate" title="@Model.NextDate.ToString(Model.DateformatPublic)" data-date="@Model.NextDate.ToString(Model.DateformatInternal)">&rsaquo;</a>
+        </div>
+        <dl id="metadata">
+            <dt>Zuletzt aktualisiert:</dt>
+            <dd>vor @Model.LastUpdatedInWords (@Vertretungsplan.LastUpdated.ToString("dd. MMMMM, HH:mm") Uhr)</dd>
+            @if (@Vertretungsplan.TeacherNotes.Length != 0)
+                {
+                <dt>Anmerkungen für Lehrer:</dt>
+                <dd>@Vertretungsplan.TeacherNotes</dd>
+            }
+            @if (@Vertretungsplan.StudentNotes.Length != 0 && Vertretungsplan.StudentNotes != Vertretungsplan.TeacherNotes)
+                {
+                <dt>Anmerkungen für Schüler:</dt>
+                <dd>@Vertretungsplan.StudentNotes</dd>
+            }
+            @if (@Vertretungsplan.AbsentForms.Length != 0)
+                {
+                <dt>Abwesende Klassen:</dt>
+                <dd>@Vertretungsplan.AbsentForms</dd>
+            }
+            @if (@Vertretungsplan.AbsentTeachers.Length != 0)
+                {
+                <dt>Abwesende Lehrer:</dt>
+                <dd>@Vertretungsplan.AbsentTeachers</dd>
+            }
+            @if (@Vertretungsplan.MissingRooms.Length != 0)
+                {
+                <dt>Fehlende Räume:</dt>
+                <dd>@Vertretungsplan.MissingRooms</dd>
+            }
+        </dl>
+        <a href="http://www.gymnasium-unterrieden.de/"><img src="/images/logo_gus.png" id="guslogo"></a>
+    </header>
+    <section id="data">
+        @if (Model.Entries.Count > 0)
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Lehrer</th>
+                        <th>Stunde</th>
+                        <th>Klasse</th>
+                        <th>Fach</th>
+                        <th>Raum</th>
+                        <th>für</th>
+                        <th>Bemerkung</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="colorstripe"><td colspan="7"></td></tr>
+                    @foreach (var entry in Model.Entries)
+                    {
+                        <tr>
+                            <td>
+                                @entry.SubstitutionTeacher
+                            </td>
+                            <td>
+                                @entry.Lesson.
+                            </td>
+                            <td>
+                                @entry.Form
+                            </td>
+                            <td>
+                                @entry.SubstitutionSubject
+                            </td>
+                            <td>
+                                @entry.SubstitutionRoom
+                            </td>
+                            <td>
+                                @entry.OriginalTeacher
+                            </td>
+                            <td>
+                                @entry.Note
+                            </td>
+                        </tr>
+                    }
+                    <tr class="colorstripe"><td colspan="7"></td></tr>
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <div>
+                Für diesen Tag gibt es keine Vertretungen.
+            </div>
+        }
+    </section>
+    }
+    else
+    {
+        ViewData["HideFooter"] = true;
+        <div id="nodata">
+            <div>Im Moment gibt es keine Vertretungen.</div>
+            Bitte versuchen Sie es in ein paar Minuten erneut.
+        </div>
+    }

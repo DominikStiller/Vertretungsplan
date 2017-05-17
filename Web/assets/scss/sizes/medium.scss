@@ -1,0 +1,71 @@
+// main: ../main.scss
+// min-width: 1000px
+
+body {
+   font-size: 16px;
+}
+
+header {
+   // Logo should never be over #data
+   min-height: 250px;
+}
+
+#dateselector-container {
+   #dateselector {
+      font-size: 3em;
+      background: transparent;
+      padding: 0;
+   }
+
+   #nextdate,
+   #previousdate {
+      font-size: 4em;
+   }
+}
+
+#guslogo {
+   display: block;
+   width: 250px;
+   top: 0;
+   right: 2em;
+}
+
+#data {
+   td,
+   th {
+      padding: 10px 1rem;
+   }
+
+   th {
+      padding-top: 18px;
+      padding-bottom: 18px;
+      font-size: 1.2em;
+   }
+
+   tbody tr {
+      transition: background-color .2s;
+
+      td:not(:last-child) {
+         transition: border-color .2s;
+      }
+      // Row hover effect
+      &:hover:not(.divider) {
+         background-color: #ccc;
+         transition: background-color .3s .2s;
+
+         td:not(:last-child) {
+            border-color: #bbb;
+            transition: border-color .3s .2s;
+         }
+      }
+   }
+}
+
+#nodata {
+   padding: 0 2em;
+   font-size: 1.5em;
+
+   div {
+      font-size: 4rem;
+   }
+}

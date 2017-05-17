@@ -1,0 +1,161 @@
+// main: main.scss
+// Styles that are common to all screen sizes
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+body {
+   font-family: "Liberation-Sans", Arial, sans-serif;
+   line-height: 1.5em;
+   color: $font-color;
+   background-color: $body-color;
+}
+
+footer,
+main {
+   max-width: 1300px;
+}
+
+main {
+   // For IE
+   display: block;
+   margin-bottom: 1.5em;
+}
+
+header {
+   margin-bottom: 2em;
+   position: relative;
+}
+
+#guslogo {
+   position: absolute;
+   @include not-selectable();
+}
+
+#dateselector-container {
+   @include not-selectable();
+
+   #dateselector {
+      font-family: mr-eaves-sans, sans-serif;
+      font-style: normal;
+      font-weight: 200;
+      display: inline-block;
+      border: none;
+      outline: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      border-radius: $border-radius;
+
+      &::-ms-expand {
+         display: none;
+      }
+
+      option {
+         // Hide currently selected date
+         &[selected=selected] {
+            display: none;
+         }
+
+         &:active,
+         &:focus,
+         &:hover {
+            outline: none;
+            background-color: #ddd;
+            border-radius: $border-radius;
+         }
+      }
+   }
+
+   #nextdate,
+   #previousdate {
+      font-family: mr-eaves-sans, sans-serif;
+      font-weight: bold;
+      cursor: pointer;
+   }
+}
+
+#metadata {
+   dt {
+      font-weight: bold;
+   }
+
+   dd {
+      margin-bottom: 1em;
+      // Break at \n
+      white-space: pre-line;
+   }
+}
+
+#data {
+   table {
+      border-collapse: collapse;
+      text-align: left;
+      width: 100%;
+   }
+   // Colors
+   thead tr {
+      background-color: #ccc;
+   }
+
+   tbody tr {
+      &:nth-child(odd) {
+         background-color: #e0e0e0;
+      }
+
+      &:first-child {
+         box-shadow: 0 3px 7px -1px #ddd;
+      }
+
+      td:not(:last-child) {
+         border-right: 2px solid #ccc;
+      }
+   }
+   // Round borders
+   th {
+      &:first-child {
+         border-top-left-radius: $border-radius;
+      }
+
+      &:last-child {
+         border-top-right-radius: $border-radius;
+      }
+   }
+
+   tbody tr:last-child {
+      td:first-child {
+         border-bottom-left-radius: $border-radius;
+      }
+
+      td:last-child {
+         border-bottom-right-radius: $border-radius;
+      }
+   }
+}
+
+.colorstripe td {
+   padding: 0 !important;
+   height: 5px !important;
+   background: linear-gradient(to right, $cyan, $blue);
+}
+
+footer {
+   #copyright {
+      float: right;
+   }
+
+   a {
+      text-decoration: none;
+      color: $font-color;
+   }
+}
+
+#nodata {
+   line-height: normal;
+
+   div {
+      margin-bottom: 1rem;
+   }
+}

@@ -1,0 +1,20 @@
+// compileExpanded: main.css
+
+@import "settings";
+@import "mixins";
+
+@import "common";
+
+@import "sizes/xsmall";
+@media(min-width: 500px) {
+    @import"sizes/small";
+}
+@media(min-width: 1000px) {
+    @import"sizes/medium";
+}
+@media(min-width: 1300px) {
+    @import"sizes/large";
+}
+@media(min-width: 1900px) {
+    @import"sizes/xlarge";
+}

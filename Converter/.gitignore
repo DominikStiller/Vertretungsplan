@@ -1,0 +1,7 @@
+build/
+.nb-gradle/
+.gradle/
+
+Development.properties
+Production.properties
+vp.mdb

@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <AssemblyName>DominikStiller.VertretungsplanServer.Models</AssemblyName>
+    <RootNamespace>DominikStiller.VertretungsplanServer.Models</RootNamespace>
+  </PropertyGroup>
+
+</Project>

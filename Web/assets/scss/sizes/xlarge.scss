@@ -1,0 +1,25 @@
+// main: ../main.scss
+// min-width: 1900px
+
+main,
+footer {
+   padding: 0;
+}
+
+main {
+   margin-top: 8em;
+}
+
+#dateselector-container {
+   margin-bottom: 4em;
+   margin-left: -200px;
+
+   #dateselector {
+      font-size: 8em;
+   }
+
+   #previousdate,
+   #nextdate {
+      font-size: 12em;
+   }
+}
