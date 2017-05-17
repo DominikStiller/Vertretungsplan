@@ -14,7 +14,7 @@ namespace DominikStiller.VertretungsplanServer.Api.Helper
     {
         readonly VertretungsplanRepository vertretungsplanRepository;
         readonly ILogger logger;
-        DataLoaderOptions options;
+        readonly DataLoaderOptions options;
 
         AmazonS3Client s3;
 
