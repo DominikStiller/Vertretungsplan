@@ -5,9 +5,12 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.file.Files;
@@ -82,6 +85,7 @@ public class Converter {
       s3.putObject(config.getProperty("Output.S3Bucket"), config.getProperty("Output.S3Key"), mapper.writeValueAsString(vps));
 
       notifyApi();
+      notifyFCM();
    }
 
    // Download database from S3
@@ -134,7 +138,7 @@ public class Converter {
                     String absentForms = rs.getString("AbwKlassen");
                     String absentCourses = rs.getString("AbwKurse");
                     // Add comma only if both have content
-                    vp.absentForms = absentForms + (absentForms.equals("") || absentCourses.equals("") ? "" : ", ") + absentCourses;
+                    vp.absentForms = absentForms + (absentForms.isEmpty() || absentCourses.isEmpty() ? "" : ", ") + absentCourses;
                     vp.absentTeachers = rs.getString("AbwLehrer");
                     vp.missingRooms = rs.getString("FehlRäume");
                  }
@@ -184,5 +188,28 @@ public class Converter {
       httpConnection.getOutputStream().close();
       httpConnection.getResponseCode();
       httpConnection.disconnect();
+   }
+
+   private void notifyFCM() throws IOException {
+      String serverKey = config.getProperty("FCM.ServerKey");
+      if (!serverKey.isEmpty()) {
+         HttpURLConnection httpConnection = (HttpURLConnection) new URL("https://fcm.googleapis.com/fcm/send").openConnection();
+         httpConnection.setRequestMethod(("POST"));
+         httpConnection.setRequestProperty("Content-Type", "application/json");
+         httpConnection.setRequestProperty("Authorization", "key=" + serverKey);
+         httpConnection.setDoInput(true);
+         httpConnection.setDoOutput(true);
+
+         ObjectNode root = new ObjectMapper().createObjectNode();
+         root.put("to", "/topics/updated");
+
+         try (OutputStream out = httpConnection.getOutputStream();
+                 OutputStreamWriter wr = new OutputStreamWriter(out)) {
+            wr.write(root.toString());
+         }
+         
+         httpConnection.getResponseCode();
+         httpConnection.disconnect();
+      }
    }
 }

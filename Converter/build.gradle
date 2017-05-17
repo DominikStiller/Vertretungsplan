@@ -31,7 +31,6 @@ repositories {
 dependencies {
    testCompile group: 'junit', name: 'junit', version: '4.11'
    compile 'com.amazonaws:aws-java-sdk-s3'
-   compile 'com.amazonaws:aws-java-sdk-sts'
    compile ('net.sf.ucanaccess:ucanaccess:4.0.2') {
       exclude group: 'org.mockito', module: 'mockito-core'
    }
