@@ -3,7 +3,9 @@ This is the code for displaying teacher substitution schedules created with [Tim
 
 It was created for the [Gymnasium Unterrieden Sindelfingen](http://www.gymnasium-unterrieden.de/), but can be used by any school using the aforementioned software.
 
+
 ## Components
+The system comprises four interacting parts:
 
 ### Uploader
 Uploader is a simple GUI application for Windows which can be run in the background.
@@ -27,3 +29,21 @@ Web is the server for the website intended to run in an Amazon EC2 instance (t2.
 It periodically checks with Api for new or updated data.
 After loading, the data is then served as a responsive website.
 There is a student and a teacher version, displaying the same data but with different filtering, formatting and arrangement.
+
+
+## Platforms and Tools
+The components are written for different platforms using different tools.
+
+### Uploader (C#/.NET Framework 3.5)
+Uploader is developed using Visual Studio 2017. It targets .NET Framework 3.5 for compatibility with Windows XP.
+
+### Converter (Java 8)
+Converter uses Gradle as build system and is the only component written in Java.
+I use NetBeans for development, but any other IDE can be used.
+The Gradle `deploy` task for deployment to AWS Lambda requires the [AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) to be installed.
+
+### Api and Web (C#/.NET Core 1.1)
+Api and Web are written in ASP.NET Core for high performance and cross-platform compatibility.
+For development, I use Visual Studio 2017 with the following extensions:
+* [BundlerMinifier](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BundlerMinifier) for minifying CSS and JavaScript files as soon as they have been changed
+* [AWS Toolkit](http://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/getting-set-up.html) for easy deployment to Amazon EC2 using AWS Elastic Beanstalk
