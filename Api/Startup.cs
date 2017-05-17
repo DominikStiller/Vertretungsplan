@@ -38,7 +38,7 @@ namespace DominikStiller.VertretungsplanServer.Api
             services.AddSingleton<DataLoader, DataLoader>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, DataLoader loader)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, DataLoader dataLoader)
         {
             if (env.IsDevelopment())
             {
@@ -53,7 +53,7 @@ namespace DominikStiller.VertretungsplanServer.Api
 
             app.UseMvc();
 
-            loader.LoadDataFromS3();
+            dataLoader.LoadDataFromS3();
         }
     }
 }
