@@ -197,7 +197,6 @@ public class Converter {
          httpConnection.setRequestMethod(("POST"));
          httpConnection.setRequestProperty("Content-Type", "application/json");
          httpConnection.setRequestProperty("Authorization", "key=" + serverKey);
-         httpConnection.setDoInput(true);
          httpConnection.setDoOutput(true);
 
          ObjectNode root = new ObjectMapper().createObjectNode();
