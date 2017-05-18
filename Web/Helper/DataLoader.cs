@@ -8,6 +8,7 @@ using System.Threading;
 using System.Linq;
 
 using DominikStiller.VertretungsplanServer.Models;
+using System.Threading.Tasks;
 
 namespace DominikStiller.VertretungsplanServer.Web.Helper
 {
@@ -44,28 +45,33 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
             }, null, 0, 2000);
         }
 
-        void LoadDataFromApi()
+        async Task LoadDataFromApi()
         {
-            var json = client.GetAsync("/dates?metadata").Result.Content.ReadAsStringAsync().Result;
+            var response = await client.GetAsync("/dates?metadata");
 
-            var dates = JsonConvert.DeserializeObject<List<Vertretungsplan>>(json);
-            foreach (var e in dates)
+            if (response.IsSuccessStatusCode)
             {
-                var date = e.Date;
-                var dateExists = vertretungsplanRepository.Contains(date);
-                // New or more recent than existing version
-                if (!dateExists || e.LastUpdated > vertretungsplanRepository.Find(date).LastUpdated)
+                var json = await response.Content.ReadAsStringAsync();
+
+                var dates = JsonConvert.DeserializeObject<List<Vertretungsplan>>(json);
+                foreach (var e in dates)
                 {
-                    json = client.GetAsync("/dates/" + date.ToString("yyyy-MM-dd")).Result.Content.ReadAsStringAsync().Result;
-                    var vp = JsonConvert.DeserializeObject<Vertretungsplan>(json);
-                    vertretungsplanRepository.Add(vp);
+                    var date = e.Date;
+                    var dateExists = vertretungsplanRepository.Contains(date);
+                    // New or more recent than existing version
+                    if (!dateExists || e.LastUpdated > vertretungsplanRepository.Find(date).LastUpdated)
+                    {
+                        json = client.GetAsync("/dates/" + date.ToString("yyyy-MM-dd")).Result.Content.ReadAsStringAsync().Result;
+                        var vp = JsonConvert.DeserializeObject<Vertretungsplan>(json);
+                        vertretungsplanRepository.Add(vp);
+                    }
                 }
-            }
 
-            var oldDates = vertretungsplanRepository.GetAllDates().ToList().Except(dates.Select(vp => vp.Date));
-            foreach (var vp in oldDates)
-            {
-                vertretungsplanRepository.Remove(vp);
+                var oldDates = vertretungsplanRepository.GetAllDates().ToList().Except(dates.Select(vp => vp.Date));
+                foreach (var vp in oldDates)
+                {
+                    vertretungsplanRepository.Remove(vp);
+                }
             }
         }
     }
