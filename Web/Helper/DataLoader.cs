@@ -61,8 +61,10 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
                     // New or more recent than existing version
                     if (!dateExists || e.LastUpdated > vertretungsplanRepository.Find(date).LastUpdated)
                     {
-                        json = client.GetAsync("/dates/" + date.ToString("yyyy-MM-dd")).Result.Content.ReadAsStringAsync().Result;
-                        var vp = JsonConvert.DeserializeObject<Vertretungsplan>(json);
+                        var dateResponse = await client.GetAsync("/dates/" + date.ToString("yyyy-MM-dd"));
+                        var dateJson = await dateResponse.Content.ReadAsStringAsync();
+
+                        var vp = JsonConvert.DeserializeObject<Vertretungsplan>(dateJson);
                         vertretungsplanRepository.Add(vp);
                     }
                 }
