@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 
 using DominikStiller.VertretungsplanServer.Models;
+using System.Threading.Tasks;
 
 namespace DominikStiller.VertretungsplanServer.Api.Helper
 {
@@ -27,11 +28,11 @@ namespace DominikStiller.VertretungsplanServer.Api.Helper
             s3 = new AmazonS3Client(Amazon.RegionEndpoint.EUCentral1);
         }
 
-        public void LoadDataFromS3()
+        public async Task LoadDataFromS3()
         {
             try
             {
-                var response = s3.GetObjectAsync(options.S3Bucket, options.S3Key).Result;
+                var response = await s3.GetObjectAsync(options.S3Bucket, options.S3Key);
 
                 string json;
                 using (var reader = new StreamReader(response.ResponseStream))

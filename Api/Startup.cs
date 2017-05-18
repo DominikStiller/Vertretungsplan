@@ -31,11 +31,13 @@ namespace DominikStiller.VertretungsplanServer.Api
 
             services.Configure<DataLoaderOptions>(Configuration.GetSection("DataLoader"));
             services.Configure<VertretungsplanControllerOptions>(Configuration.GetSection("VertretungsplanController"));
+            services.Configure<NotifierOptions>(Configuration.GetSection("Notifier"));
 
             services.AddMvc();
 
             services.AddSingleton<VertretungsplanRepository, VertretungsplanRepository>();
             services.AddSingleton<DataLoader, DataLoader>();
+            services.AddSingleton<Notifier, Notifier>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, DataLoader dataLoader)

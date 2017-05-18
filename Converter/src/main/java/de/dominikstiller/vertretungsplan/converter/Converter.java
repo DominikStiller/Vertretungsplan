@@ -5,14 +5,9 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.S3Object;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
@@ -84,8 +79,7 @@ public class Converter {
       // Upload converted file to S3
       s3.putObject(config.getProperty("Output.S3Bucket"), config.getProperty("Output.S3Key"), mapper.writeValueAsString(vps));
 
-      notifyApi();
-      notifyFCM();
+      Notifier.notifyApi(config.getProperty("Api.Host"), config.getProperty("Api.AuthInfo"));
    }
 
    // Download database from S3
@@ -177,38 +171,5 @@ public class Converter {
    // Replace dots denoting N/A with an em dash
    private String replaceDot(String string) {
       return string.equals(".") ? "—" : string;
-   }
-
-   private void notifyApi() throws IOException {
-      HttpURLConnection httpConnection = (HttpURLConnection) new URL("http://" + config.getProperty("Api.Host") + "/dates").openConnection();
-      httpConnection.setRequestMethod("POST");
-      httpConnection.setRequestProperty("Authorization", "Basic " + config.getProperty("Api.AuthInfo"));
-      httpConnection.setDoOutput(true);
-      // Necessary to send request
-      httpConnection.getOutputStream().close();
-      httpConnection.getResponseCode();
-      httpConnection.disconnect();
-   }
-
-   private void notifyFCM() throws IOException {
-      String serverKey = config.getProperty("FCM.ServerKey");
-      if (!serverKey.isEmpty()) {
-         HttpURLConnection httpConnection = (HttpURLConnection) new URL("https://fcm.googleapis.com/fcm/send").openConnection();
-         httpConnection.setRequestMethod(("POST"));
-         httpConnection.setRequestProperty("Content-Type", "application/json");
-         httpConnection.setRequestProperty("Authorization", "key=" + serverKey);
-         httpConnection.setDoOutput(true);
-
-         ObjectNode root = new ObjectMapper().createObjectNode();
-         root.put("to", "/topics/updated");
-
-         try (OutputStream out = httpConnection.getOutputStream();
-                 OutputStreamWriter wr = new OutputStreamWriter(out)) {
-            wr.write(root.toString());
-         }
-         
-         httpConnection.getResponseCode();
-         httpConnection.disconnect();
-      }
    }
 }
