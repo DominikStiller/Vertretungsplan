@@ -43,17 +43,12 @@ namespace DominikStiller.VertretungsplanServer.Web
             if (env.IsDevelopment())
             {
                 loggerFactory.AddDebug();
+                app.UseDeveloperExceptionPage();
             }
             else if (env.IsProduction())
             {
                 loggerFactory.AddAWSProvider(Configuration.GetAWSLoggingConfigSection());
-            }
-
-            app.UseMiddleware<ErrorLoggingMiddleware>();
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
+                app.UseMiddleware<ErrorLoggingMiddleware>();
             }
 
             app.UseStaticFiles();

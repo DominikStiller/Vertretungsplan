@@ -49,9 +49,8 @@ namespace DominikStiller.VertretungsplanServer.Api
             else if (env.IsProduction())
             {
                 loggerFactory.AddAWSProvider(Configuration.GetAWSLoggingConfigSection());
+                app.UseMiddleware<ErrorLoggingMiddleware>();
             }
-
-            app.UseMiddleware<ErrorLoggingMiddleware>();
 
             app.UseMvc();
 
