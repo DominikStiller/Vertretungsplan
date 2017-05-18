@@ -66,7 +66,7 @@ namespace DominikStiller.VertretungsplanServer.Api.Controllers
             return BasicAuthentication.Auth("update", options.UpdatePassword, HttpContext, async () =>
             {
                 await dataLoader.LoadDataFromS3();
-                notifier.NotifyFCM();
+                await notifier.NotifyFCM();
             });
         }
     }

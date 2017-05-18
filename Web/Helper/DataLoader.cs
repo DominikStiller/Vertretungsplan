@@ -32,11 +32,11 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
 
         public void Start()
         {
-            timer = new Timer((s) =>
+            timer = new Timer(async (s) =>
             {
                 try
                 {
-                    LoadDataFromApi();
+                    await LoadDataFromApi();
                 }
                 catch (Exception ex)
                 {
