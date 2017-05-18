@@ -2,6 +2,8 @@
 using Amazon.S3;
 using Amazon.S3.Model;
 using System;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
 
@@ -10,6 +12,7 @@ namespace DominikStiller.VertretungsplanUploader.UI
     public partial class Window : Form
     {
         string database;
+        string s3UploadBucket, s3UploadKey;
         FileSystemWatcher watcher;
         AmazonS3Client s3;
 
@@ -17,7 +20,13 @@ namespace DominikStiller.VertretungsplanUploader.UI
         {
             InitializeComponent();
 
-            s3 = new AmazonS3Client(new AppConfigAWSCredentials(), Amazon.RegionEndpoint.EUCentral1);
+            var s3UploadSection = ConfigurationManager.GetSection("s3Upload") as NameValueCollection;
+            s3UploadBucket = s3UploadSection["Bucket"];
+            s3UploadKey = s3UploadSection["Key"];
+
+            var awsCredentialsSection = ConfigurationManager.GetSection("awsCredentials") as NameValueCollection;
+            var awsCredentials = new BasicAWSCredentials(awsCredentialsSection["AccessKey"], awsCredentialsSection["SecretKey"]);
+            s3 = new AmazonS3Client(awsCredentials, Amazon.RegionEndpoint.EUCentral1);
 
             watcher = new FileSystemWatcher();
             watcher.NotifyFilter = NotifyFilters.LastWrite;
@@ -80,9 +89,9 @@ namespace DominikStiller.VertretungsplanUploader.UI
             {
                 UploadToS3();
             }
-            catch (IOException ex)
+            catch (IOException)
             {
-                MessageBox.Show(this, "Die Datei wird gerade von einem anderen Programm benutzt. Der Vertretungsplan wurde nicht veröffentlicht.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, "Es ist ein Dateifehler aufgetreten. Möglicherweise wird die Datei gerade von einem anderen Programm benutzt. Der Vertretungsplan wurde nicht veröffentlicht.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             MessageBox.Show(this, "Der Vertretungsplan wurde erfolgreich veröffentlicht. Die Änderungen werden bald online angezeigt.", "Erfolg", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -122,14 +131,10 @@ namespace DominikStiller.VertretungsplanUploader.UI
             {
                 s3.PutObject(new PutObjectRequest()
                 {
-                    BucketName = "dominikstiller-vp",
-                    Key = "vp.mdb",
+                    BucketName = s3UploadBucket,
+                    Key = s3UploadKey,
                     FilePath = database
                 });
-            }
-            catch (Exception ex)
-            {
-                throw ex;
             }
             finally
             {

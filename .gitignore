@@ -261,4 +261,3 @@ __pycache__/
 *.pyc
 
 appsettings.*.json
-AWSCredentials.config

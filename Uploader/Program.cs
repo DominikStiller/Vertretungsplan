@@ -9,6 +9,7 @@ namespace DominikStiller.VertretungsplanUploader
 {
     static class Program
     {
+        // Only allow one instance of this application
         // http://sanity-free.org/143/csharp_dotnet_single_instance_application.html
         static Mutex mutex = new Mutex(true, "{51D773FB-2AA8-4D37-8764-2DD0C88808B4}");
 
@@ -17,6 +18,11 @@ namespace DominikStiller.VertretungsplanUploader
         {
             if (mutex.WaitOne(TimeSpan.Zero, true))
             {
+                // Global exception handler
+                Application.ThreadException += (s, e) =>
+                {
+                    MessageBox.Show(null, "Es ist ein unbekannter Fehler aufgetreten. Bitte senden Sie eine Email an Dominik Stiller (domi.stiller@gmail.com) mit dem Inhalt dieses Fensters. Sie können diesen mit Strg + C kopieren.\n\n" + e.Exception.ToString(), "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                };
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new Window());
