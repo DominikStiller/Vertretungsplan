@@ -35,7 +35,7 @@ namespace DominikStiller.VertretungsplanServer.Api.Controllers
         {
             IEnumerable<Vertretungsplan> vps = vertretungsplanRepository.GetAll();
             if (Request.Query.ContainsKey("hidepast"))
-                vps = vps.Where(vp => vp.Date >= DateTime.Now.Date);
+                vps = vps.Where(vp => vp.Date >= VertretungsplanTime.Now.Date);
 
             // List dates
             if (Request.Query.ContainsKey("metadata"))

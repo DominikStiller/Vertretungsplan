@@ -4,6 +4,7 @@ using System.Linq;
 
 using DominikStiller.VertretungsplanServer.Models;
 using DominikStiller.VertretungsplanServer.Web.Controllers;
+using DominikStiller.VertretungsplanServer.Helper;
 
 namespace DominikStiller.VertretungsplanServer.Web.Helper
 {
@@ -14,8 +15,9 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
 
         public static VertretungsplanViewModel GenerateViewModel(VertretungsplanRepository vertretungsplanRepository, VertretungsplanType type, DateTime? date = null)
         {
+
             var model = new VertretungsplanViewModel();
-            var vertretungsplan = vertretungsplanRepository.FindNearest(date ?? DateTime.Now);
+            var vertretungsplan = vertretungsplanRepository.FindNearest(date ?? VertretungsplanTime.Now);
 
             model.Vertretungsplan = vertretungsplan;
 
@@ -46,7 +48,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
                         .ToList();
                 }
 
-                model.LastUpdatedInWords = TimespanInWords(DateTime.Now - model.Vertretungsplan.LastUpdated);
+                model.LastUpdatedInWords = TimespanInWords(VertretungsplanTime.Now - model.Vertretungsplan.LastUpdated);
 
                 model.Dates = vertretungsplanRepository.GetAllDates().Select(d => d.ToString(DATEFORMAT_INTERNAL)).ToList();
                 model.PreviousDate = vertretungsplanRepository.GetPrevious(vertretungsplan).Date;
