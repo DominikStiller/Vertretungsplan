@@ -44,9 +44,9 @@ namespace DominikStiller.VertretungsplanServer.Api.Helper
                 vertretungsplanRepository.Clear();
                 vertretungsplanRepository.AddRange(vps);
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                logger.LogError(ex.ToString());
+                logger.LogError($"[ERROR] while loading data\n{e}");
             }
         }
     }

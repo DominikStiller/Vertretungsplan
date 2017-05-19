@@ -6,19 +6,16 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using DominikStiller.VertretungsplanServer.Models;
 
 using static DominikStiller.VertretungsplanServer.Web.Helper.VertretungsplanHelper;
-using Microsoft.Extensions.Logging;
 
 namespace DominikStiller.VertretungsplanServer.Web.Controllers
 {
     public class VertretungsplanController : Controller
     {
         readonly VertretungsplanRepository vertretungsplanRepository;
-        readonly ILogger logger;
 
-        public VertretungsplanController(VertretungsplanRepository vertretungsplanRepository, ILogger<VertretungsplanController> logger)
+        public VertretungsplanController(VertretungsplanRepository vertretungsplanRepository)
         {
             this.vertretungsplanRepository = vertretungsplanRepository;
-            this.logger = logger;
         }
 
         [Route("/")]

@@ -2,7 +2,6 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 using DominikStiller.VertretungsplanServer.Models;
@@ -17,16 +16,14 @@ namespace DominikStiller.VertretungsplanServer.Api.Controllers
         readonly VertretungsplanRepository vertretungsplanRepository;
         readonly DataLoader dataLoader;
         readonly Notifier notifier;
-        readonly ILogger logger;
         readonly VertretungsplanControllerOptions options;
 
 
-        public VertretungsplanController(VertretungsplanRepository vertretungsplanRepository, DataLoader dataLoader, Notifier notifier, ILogger<VertretungsplanController> logger, IOptions<VertretungsplanControllerOptions> options)
+        public VertretungsplanController(VertretungsplanRepository vertretungsplanRepository, DataLoader dataLoader, Notifier notifier, IOptions<VertretungsplanControllerOptions> options)
         {
             this.vertretungsplanRepository = vertretungsplanRepository;
             this.dataLoader = dataLoader;
             this.notifier = notifier;
-            this.logger = logger;
             this.options = options.Value;
         }
 

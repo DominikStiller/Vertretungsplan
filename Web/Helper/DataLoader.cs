@@ -38,9 +38,9 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
                 {
                     await LoadDataFromApi();
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
-                    logger.LogError(ex.ToString());
+                    logger.LogError($"[ERROR] while loading data\n{e}");
                 }
             }, null, 0, 2000);
         }
