@@ -55,7 +55,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
     public class VertretungsplanViewModel
     {
         public Vertretungsplan Vertretungsplan { get; set; }
-        // Only used by Teachers because filtering and sorting Vertretungsplan.Entries changes all entries
+        // Only used by Teachers because filtering and sorting Vertretungsplan.Entries directly would change all entries in VertretungsplanRepository
         public List<Entry> Entries { get; set; }
 
         public string LastUpdatedInWords { get; set; }
