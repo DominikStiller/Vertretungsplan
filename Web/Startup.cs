@@ -40,6 +40,8 @@ namespace DominikStiller.VertretungsplanServer.Web
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, DataLoader dataLoader)
         {
+            app.UseStatusCodePagesWithReExecute("/error");
+
             if (env.IsDevelopment())
             {
                 loggerFactory.AddDebug();
@@ -48,11 +50,10 @@ namespace DominikStiller.VertretungsplanServer.Web
             else if (env.IsProduction())
             {
                 loggerFactory.AddAWSProvider(Configuration.GetAWSLoggingConfigSection());
-                app.UseMiddleware<ErrorLoggingMiddleware>();
+                app.UseErrorLogging();
             }
 
             app.UseStaticFiles();
-
             app.UseMvc();
 
             dataLoader.Start();

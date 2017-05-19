@@ -136,11 +136,11 @@ footer a {
   color: #333;
 }
 
-#nodata {
+#message {
   line-height: normal;
 }
 
-#nodata div {
+#message div {
   margin-bottom: 1rem;
 }
 
@@ -198,7 +198,7 @@ footer {
   margin-bottom: 1.5em;
 }
 
-#nodata div {
+#message div {
   font-size: 2rem;
 }
 
@@ -263,11 +263,11 @@ footer {
     border-color: #bbb;
     transition: border-color .3s .2s;
   }
-  #nodata {
+  #message {
     padding: 0 2em;
     font-size: 1.5em;
   }
-  #nodata div {
+  #message div {
     font-size: 4rem;
   }
 }

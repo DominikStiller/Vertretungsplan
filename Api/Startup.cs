@@ -45,11 +45,12 @@ namespace DominikStiller.VertretungsplanServer.Api
             if (env.IsDevelopment())
             {
                 loggerFactory.AddDebug();
+                app.UseDeveloperExceptionPage();
             }
             else if (env.IsProduction())
             {
                 loggerFactory.AddAWSProvider(Configuration.GetAWSLoggingConfigSection());
-                app.UseMiddleware<ErrorLoggingMiddleware>();
+                app.UseErrorLogging();
             }
 
             app.UseMvc();

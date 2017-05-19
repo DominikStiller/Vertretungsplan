@@ -21,9 +21,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
             this.logger = logger;
         }
 
-
         [Route("/")]
-        [Route("/error")]
         public IActionResult Students()
         {
             return View(GenerateViewModel(vertretungsplanRepository, VertretungsplanType.STUDENTS));
@@ -46,6 +44,12 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
         {
             return PartialView("Teachers", GenerateViewModel(vertretungsplanRepository, VertretungsplanType.TEACHERS, date));
         }
+
+        [Route("/error")]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel() { StatusCode = HttpContext.Response.StatusCode });
+        }
     }
 
     public class VertretungsplanViewModel
@@ -63,5 +67,10 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
 
         public string DateformatInternal { get; set; }
         public string DateformatPublic { get; set; }
+    }
+
+    public class ErrorViewModel
+    {
+        public int StatusCode { get; set; }
     }
 }

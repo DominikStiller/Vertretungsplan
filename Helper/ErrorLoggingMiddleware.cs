@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 
 namespace DominikStiller.VertretungsplanServer.Helper
 {
+    // https://blog.elmah.io/error-logging-middleware-in-aspnetcore/
     public class ErrorLoggingMiddleware
     {
         readonly RequestDelegate next;
@@ -24,8 +26,18 @@ namespace DominikStiller.VertretungsplanServer.Helper
             }
             catch (Exception e)
             {
-                logger.LogError(e.ToString());
+                logger.LogError($"[ERROR]\n{e}");
+
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             }
+        }
+    }
+
+    public static class ErrorLoggingMiddlewareExtensions
+    {
+        public static IApplicationBuilder UseErrorLogging(this IApplicationBuilder builder)
+        {
+            return builder.UseMiddleware<ErrorLoggingMiddleware>();
         }
     }
 }

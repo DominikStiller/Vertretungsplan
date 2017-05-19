@@ -1,0 +1,18 @@
+﻿@model DominikStiller.VertretungsplanServer.Web.Controllers.ErrorViewModel
+
+@{
+    ViewData["Title"] = "Fehler";
+    ViewData["Lightweight"] = true;
+}
+
+<div id="message">
+    <div>Es ist ein Fehler aufgetreten (Code @Model.StatusCode).</div>
+    @if (Model.StatusCode == 404)
+    {
+        <text>Die Seite konnte nicht gefunden werden.</text>
+    }
+    else if (Model.StatusCode >= 500 & Model.StatusCode < 600)
+    {
+        <text>Bitte versuchen Sie es in ein paar Minuten erneut.</text>
+    }
+</div>
