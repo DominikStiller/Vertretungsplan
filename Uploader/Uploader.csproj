@@ -62,6 +62,11 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Resources\UIStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UIStrings.resx</DependentUpon>
+    </Compile>
     <Compile Include="UI\Window.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +75,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Resources\UIStrings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>UIStrings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Window.resx">
       <DependentUpon>Window.cs</DependentUpon>
       <SubType>Designer</SubType>

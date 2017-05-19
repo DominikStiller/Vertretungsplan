@@ -7,8 +7,11 @@ using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
 
+
 namespace DominikStiller.VertretungsplanUploader.UI
 {
+    using UIStrings = Resources.UIStrings;
+
     public partial class Window : Form
     {
         string database;
@@ -60,14 +63,14 @@ namespace DominikStiller.VertretungsplanUploader.UI
         {
             if (WindowState != FormWindowState.Minimized)
             {
-                var result = MessageBox.Show(this, "Wollen Sie das Programm wirklich beenden?\nWenn sie es minimieren werden Änderungen weiter im Hintergrund veröffentlicht.", "Programm beenden", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+                var result = MessageBox.Show(this, UIStrings.CloseConfirmationDialog_Content, UIStrings.CloseConfirmationDialog_Title, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
                 e.Cancel = result == DialogResult.No;
             }
         }
 
         private void infoButton_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(this, "Dies ist ein Helfer-Programm, um den Online-Vertretungsplan zu aktualisieren. Es arbeitet selbstständig im Hintergrund und lädt die neue Version automatisch hoch, das Hochladen kann aber auch manuell ausgelöst werden.\n\nBei Fragen wenden Sie sich bitte an Dominik Stiller (domi.stiller@gmail.com).", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(this, UIStrings.InfoDialog_Content, UIStrings.InfoDialog_Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void chooseFileButton_Click(object sender, EventArgs e)
@@ -91,10 +94,10 @@ namespace DominikStiller.VertretungsplanUploader.UI
             }
             catch (IOException)
             {
-                MessageBox.Show(this, "Es ist ein Dateifehler aufgetreten. Möglicherweise wird die Datei gerade von einem anderen Programm benutzt. Der Vertretungsplan wurde nicht veröffentlicht.", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(this, UIStrings.IOExceptionDialog_Content, UIStrings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            MessageBox.Show(this, "Der Vertretungsplan wurde erfolgreich veröffentlicht. Die Änderungen werden bald online angezeigt.", "Erfolg", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(this, UIStrings.PublishSuccessDialog_Content, UIStrings.PublishSuccessDialog_Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void DatabasePathChanged()
@@ -102,7 +105,7 @@ namespace DominikStiller.VertretungsplanUploader.UI
             // Update GUI
             pathTextBox.Text = database;
             lastChangeLabel.Text = new FileInfo(database).LastWriteTime.ToString();
-            stateLabel.Text = "Überwache auf Änderungen...";
+            statusLabel.Text = UIStrings.Status_Watching;
             uploadButton.Enabled = true;
 
             watcher.Path = Path.GetDirectoryName(database);
@@ -123,8 +126,8 @@ namespace DominikStiller.VertretungsplanUploader.UI
         {
             Invoke(new Action(() =>
             {
-                stateLabel.Text = "Veröffentliche...";
-                stateLabel.Update();
+                statusLabel.Text = UIStrings.Status_Publishing;
+                statusLabel.Update();
             }));
 
             try
@@ -140,7 +143,7 @@ namespace DominikStiller.VertretungsplanUploader.UI
             {
                 Invoke(new Action(() =>
                 {
-                    stateLabel.Text = "Überwache auf Änderungen...";
+                    statusLabel.Text = UIStrings.Status_Watching;
                 }));
             }
         }
@@ -156,7 +159,7 @@ namespace DominikStiller.VertretungsplanUploader.UI
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var result = MessageBox.Show(this, "Wollen Sie das Programm wirklich beenden? Änderungen werden dann nicht mehr veröffentlicht.", "Programm beenden", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+            var result = MessageBox.Show(this, UIStrings.ExitConfirmationDialog_Content, UIStrings.ExitConfirmationDialog_Title, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (result == DialogResult.Yes)
             {
                 Application.Exit();

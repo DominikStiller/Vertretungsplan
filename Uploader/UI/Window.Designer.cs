@@ -36,7 +36,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lastChangeLabel = new System.Windows.Forms.Label();
             this.uploadButton = new System.Windows.Forms.Button();
-            this.stateLabel = new System.Windows.Forms.Label();
+            this.statusLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.infoButton = new System.Windows.Forms.Button();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
@@ -98,14 +98,14 @@
             this.uploadButton.UseVisualStyleBackColor = true;
             this.uploadButton.Click += new System.EventHandler(this.uploadButton_Click);
             // 
-            // stateLabel
+            // statusLabel
             // 
-            this.stateLabel.AutoSize = true;
-            this.stateLabel.Location = new System.Drawing.Point(276, 48);
-            this.stateLabel.Name = "stateLabel";
-            this.stateLabel.Size = new System.Drawing.Size(119, 13);
-            this.stateLabel.TabIndex = 6;
-            this.stateLabel.Text = "Keine Datei ausgewählt";
+            this.statusLabel.AutoSize = true;
+            this.statusLabel.Location = new System.Drawing.Point(276, 48);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(119, 13);
+            this.statusLabel.TabIndex = 6;
+            this.statusLabel.Text = "Keine Datei ausgewählt";
             // 
             // label3
             // 
@@ -140,12 +140,12 @@
             this.notifyIconMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitToolStripMenuItem});
             this.notifyIconMenu.Name = "notifyIconMenu";
-            this.notifyIconMenu.Size = new System.Drawing.Size(153, 48);
+            this.notifyIconMenu.Size = new System.Drawing.Size(121, 26);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
             this.exitToolStripMenuItem.Text = "Beenden";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -155,7 +155,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(617, 75);
             this.Controls.Add(this.infoButton);
-            this.Controls.Add(this.stateLabel);
+            this.Controls.Add(this.statusLabel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.uploadButton);
             this.Controls.Add(this.lastChangeLabel);
@@ -182,7 +182,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lastChangeLabel;
         private System.Windows.Forms.Button uploadButton;
-        private System.Windows.Forms.Label stateLabel;
+        private System.Windows.Forms.Label statusLabel;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button infoButton;
         private System.Windows.Forms.NotifyIcon notifyIcon;
