@@ -154,7 +154,7 @@ namespace DominikStiller.VertretungsplanUploader.UI
             }
         }
 
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show(this, "Wollen Sie das Programm wirklich beenden? Änderungen werden dann nicht mehr veröffentlicht.", "Programm beenden", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (result == DialogResult.Yes)
