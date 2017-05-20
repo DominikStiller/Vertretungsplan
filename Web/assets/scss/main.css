@@ -130,6 +130,10 @@ header {
   background: linear-gradient(to right, #5ac7d3, #273f86), #438bb1;
 }
 
+footer {
+  overflow: auto;
+}
+
 footer #copyright {
   float: right;
 }
@@ -139,12 +143,18 @@ footer a {
   color: #333;
 }
 
-#message {
+.message {
   line-height: normal;
 }
 
-#message div {
+.message div {
   margin-bottom: 1rem;
+}
+
+.running-text a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
 }
 
 body {
@@ -205,7 +215,7 @@ footer {
   margin-bottom: 1.5em;
 }
 
-#message div {
+.message div {
   font-size: 2rem;
 }
 
@@ -275,11 +285,11 @@ footer {
     border-color: #bbb;
     transition: border-color .3s .2s;
   }
-  #message {
+  .message {
     padding: 0 2em;
     font-size: 1.5em;
   }
-  #message div {
+  .message div {
     font-size: 4rem;
   }
 }
@@ -318,6 +328,9 @@ footer {
   }
   footer {
     margin-bottom: 4em;
+  }
+  .message {
+    padding: 0;
   }
 }
 

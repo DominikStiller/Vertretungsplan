@@ -4,6 +4,12 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
 {
     public class StaticPagesController : Controller
     {
+        [Route("/datenschutz")]
+        public IActionResult PrivacyPolicy()
+        {
+            return View();
+        }
+
         [Route("/error")]
         public IActionResult Error()
         {

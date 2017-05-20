@@ -3,9 +3,10 @@
 @{
     ViewData["Title"] = "Fehler";
     ViewData["Lightweight"] = true;
+    ViewData["HideFooter"] = true;
 }
 
-<div id="message">
+<div class="message">
     <div>Es ist ein Fehler aufgetreten (Code @Model.StatusCode).</div>
     @if (Model.StatusCode == 404)
     {

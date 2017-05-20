@@ -140,6 +140,9 @@ header {
 }
 
 footer {
+   // Needed to accomomdate #copyright when wrapped since it is floated
+   overflow: auto;
+
    #copyright {
       float: right;
    }
@@ -150,10 +153,18 @@ footer {
    }
 }
 
-#message {
+.message {
    line-height: normal;
 
    div {
       margin-bottom: 1rem;
+   }
+}
+
+.running-text {
+   a {
+      color: $font-color;
+      text-decoration: none;
+      font-weight: bold;
    }
 }

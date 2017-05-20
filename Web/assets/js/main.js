@@ -26,3 +26,7 @@ function displayDate(date) {
    // To show new dates the user can refresh the page
    $("main").html(cache[date]);
 }
+
+if (document.cookie.indexOf("ga-disable=true") > -1) {
+   window["ga-disable-UA-99091816-1"] = true;
+}

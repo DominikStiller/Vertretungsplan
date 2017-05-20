@@ -9,6 +9,7 @@
     <meta name="theme-color" content="#eee">
     <link rel="shortcut icon" type="image/png" href="/images/icon.png">
     <link rel="stylesheet" href="/main.min.css">
+    @RenderSection("LightweightScripts", false)
     @if (!ViewData.ContainsKey("Lightweight"))
     {
         @RenderSection("Scripts", false)
@@ -26,6 +27,7 @@
                 })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
                 ga('create', 'UA-99091816-1', 'auto');
+                ga('set', 'anonymizeIp', true);
                 ga('send', 'pageview');
             </script>
         </environment>
@@ -35,11 +37,11 @@
     <main>
         @RenderBody()
     </main>
-    @if (!ViewData.ContainsKey("Lightweight"))
+    @if (!ViewData.ContainsKey("HideFooter"))
     {
         <footer>
             <a href="#" id="jumptotop">&#9650; Nach oben</a>
-            <span id="copyright">&copy;2017 <a href="http://dominikstiller.de/" target="_blank">Dominik Stiller</a></span>
+            <span id="copyright">&copy;2017 <a href="http://dominikstiller.de/" target="_blank">Dominik Stiller</a> &middot; <a href="/datenschutz">Datenschutz</a></span>
         </footer>
     }
 </body>
