@@ -1,10 +1,15 @@
-* {
-  margin: 0;
-  padding: 0;
+html {
   box-sizing: border-box;
 }
 
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
+}
+
 body {
+  margin: 0;
   font-family: "Liberation-Sans", Arial, sans-serif;
   line-height: 1.5em;
   color: #333;
@@ -83,6 +88,7 @@ header {
 
 #metadata dd {
   margin-bottom: 1em;
+  margin-left: 0;
   white-space: pre-line;
 }
 
@@ -149,6 +155,26 @@ footer a {
 
 .message div {
   margin-bottom: 1rem;
+}
+
+.running-text {
+  margin-bottom: 2em;
+}
+
+.running-text h2 {
+  margin-top: 2em;
+}
+
+.running-text h3 {
+  margin-bottom: 3px;
+}
+
+.running-text h3 + p {
+  margin-top: 0;
+}
+
+.running-text p {
+  text-align: justify;
 }
 
 .running-text a {
