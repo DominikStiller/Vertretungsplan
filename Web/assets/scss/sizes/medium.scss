@@ -6,8 +6,8 @@ body {
 }
 
 header {
-   // Logo should never be over #data
-   min-height: 250px;
+   // #guslogo should never be overlapping #data
+   min-height: 245px;
 }
 
 #dateselector-container {
@@ -15,11 +15,13 @@ header {
       font-size: 3em;
       background: transparent;
       padding: 0;
+      text-align-last: left;
    }
 
    #nextdate,
    #previousdate {
-      font-size: 4em;
+      font-size: 4.4em;
+      padding: 1rem;
    }
 }
 
@@ -28,6 +30,12 @@ header {
    width: 250px;
    top: 0;
    right: 2em;
+}
+
+#metadata {
+   // Metadata text should never be overlapping #guslogo
+   // Total width - (#guslogo width + #guslogo right + padding)
+   max-width: calc(100% - (250px + 2em + 3em));
 }
 
 #data {

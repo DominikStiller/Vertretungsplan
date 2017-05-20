@@ -42,29 +42,23 @@ header {
       font-family: mr-eaves-sans, sans-serif;
       font-style: normal;
       font-weight: 200;
-      display: inline-block;
-      border: none;
-      outline: none;
-      -webkit-appearance: none;
-      -moz-appearance: none;
+      border: 0;
+      outline: 0;
+      // Compensate for inline-block spacing
+      margin: 0 -4px;
       border-radius: $border-radius;
+      @include no-default-appearance();
 
       &::-ms-expand {
          display: none;
       }
 
       option {
-         // Hide currently selected date
-         &[selected=selected] {
-            display: none;
-         }
+         background-color: #ccc;
 
-         &:active,
-         &:focus,
-         &:hover {
-            outline: none;
-            background-color: #ddd;
-            border-radius: $border-radius;
+         &[selected=selected] {
+            // Hide currently selected date
+            display: none;
          }
       }
    }
@@ -74,10 +68,14 @@ header {
       font-family: mr-eaves-sans, sans-serif;
       font-weight: bold;
       cursor: pointer;
+      // For larger touchable area
+      padding: 1rem;
    }
 }
 
 #metadata {
+   text-align: justify;
+
    dt {
       font-weight: bold;
    }
@@ -138,7 +136,7 @@ header {
 .colorstripe td {
    padding: 0 !important;
    height: 5px !important;
-   background: linear-gradient(to right, $cyan, $blue);
+   background: linear-gradient(to right, $cyan, $blue), #438bb1;
 }
 
 footer {

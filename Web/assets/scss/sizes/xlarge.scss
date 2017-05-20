@@ -1,8 +1,8 @@
 // main: ../main.scss
 // min-width: 1900px
 
-main,
-footer {
+footer,
+main {
    padding: 0;
 }
 
@@ -10,16 +10,19 @@ main {
    margin-top: 8em;
 }
 
+header {
+   min-height: 215px;
+}
+
+#guslogo {
+   top: -5em;
+}
+
 #dateselector-container {
-   margin-bottom: 4em;
+   margin-bottom: 3em;
    margin-left: -200px;
+}
 
-   #dateselector {
-      font-size: 8em;
-   }
-
-   #previousdate,
-   #nextdate {
-      font-size: 12em;
-   }
+#metadata {
+   max-width: 100%;
 }

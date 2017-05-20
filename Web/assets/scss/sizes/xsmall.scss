@@ -5,8 +5,8 @@ body {
    font-size: 14px;
 }
 
-main,
-footer {
+footer,
+main {
    padding: 0 1em;
 }
 
@@ -25,19 +25,22 @@ main {
 
    #dateselector {
       font-size: 7vw;
+      padding: 6px 15px;
       background-color: #ccc;
-      padding: 3px 15px 10px;
-
-      option {
-         background-color: #ccc;
-      }
+      text-align-last: center;
    }
 
-   #previousdate,
+   #nextdate,
+   #previousdate {
+      font-size: 10.3vw;
+   }
+
+   #previousdate {
+      padding-right: .7rem;
+   }
+
    #nextdate {
-      font-size: 12vw;
-      // For larger touchable area
-      padding: 0 1rem;
+      padding-left: .7rem;
    }
 }
 

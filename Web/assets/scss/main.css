@@ -45,26 +45,24 @@ header {
   font-family: mr-eaves-sans, sans-serif;
   font-style: normal;
   font-weight: 200;
-  display: inline-block;
-  border: none;
-  outline: none;
+  border: 0;
+  outline: 0;
+  margin: 0 -4px;
+  border-radius: 8px;
   -webkit-appearance: none;
   -moz-appearance: none;
-  border-radius: 8px;
 }
 
 #dateselector-container #dateselector::-ms-expand {
   display: none;
 }
 
-#dateselector-container #dateselector option[selected=selected] {
-  display: none;
+#dateselector-container #dateselector option {
+  background-color: #ccc;
 }
 
-#dateselector-container #dateselector option:active, #dateselector-container #dateselector option:focus, #dateselector-container #dateselector option:hover {
-  outline: none;
-  background-color: #ddd;
-  border-radius: 8px;
+#dateselector-container #dateselector option[selected=selected] {
+  display: none;
 }
 
 #dateselector-container #nextdate,
@@ -72,6 +70,11 @@ header {
   font-family: mr-eaves-sans, sans-serif;
   font-weight: bold;
   cursor: pointer;
+  padding: 1rem;
+}
+
+#metadata {
+  text-align: justify;
 }
 
 #metadata dt {
@@ -124,7 +127,7 @@ header {
 .colorstripe td {
   padding: 0 !important;
   height: 5px !important;
-  background: linear-gradient(to right, #5ac7d3, #273f86);
+  background: linear-gradient(to right, #5ac7d3, #273f86), #438bb1;
 }
 
 footer #copyright {
@@ -148,8 +151,8 @@ body {
   font-size: 14px;
 }
 
-main,
-footer {
+footer,
+main {
   padding: 0 1em;
 }
 
@@ -168,18 +171,22 @@ main {
 
 #dateselector-container #dateselector {
   font-size: 7vw;
+  padding: 6px 15px;
   background-color: #ccc;
-  padding: 3px 15px 10px;
+  text-align-last: center;
 }
 
-#dateselector-container #dateselector option {
-  background-color: #ccc;
+#dateselector-container #nextdate,
+#dateselector-container #previousdate {
+  font-size: 10.3vw;
 }
 
-#dateselector-container #previousdate,
+#dateselector-container #previousdate {
+  padding-right: .7rem;
+}
+
 #dateselector-container #nextdate {
-  font-size: 12vw;
-  padding: 0 1rem;
+  padding-left: .7rem;
 }
 
 #data {
@@ -208,7 +215,7 @@ footer {
   }
   #dateselector-container #nextdate,
   #dateselector-container #previousdate {
-    font-size: 3em;
+    font-size: 2.9em;
   }
   #data {
     overflow-x: visible;
@@ -223,22 +230,27 @@ footer {
     font-size: 16px;
   }
   header {
-    min-height: 250px;
+    min-height: 245px;
   }
   #dateselector-container #dateselector {
     font-size: 3em;
     background: transparent;
     padding: 0;
+    text-align-last: left;
   }
   #dateselector-container #nextdate,
   #dateselector-container #previousdate {
-    font-size: 4em;
+    font-size: 4.4em;
+    padding: 1rem;
   }
   #guslogo {
     display: block;
     width: 250px;
     top: 0;
     right: 2em;
+  }
+  #metadata {
+    max-width: calc(100% - (250px + 2em + 3em));
   }
   #data td,
   #data th {
@@ -273,8 +285,8 @@ footer {
 }
 
 @media (min-width: 1300px) {
-  main,
-  footer {
+  footer,
+  main {
     margin: 0 auto;
   }
   main {
@@ -283,20 +295,21 @@ footer {
   }
   #guslogo {
     width: 300px;
-    top: -2em;
+    top: -3em;
     right: 0;
   }
   #dateselector-container #dateselector {
     font-size: 6em;
   }
-  #dateselector-container #previousdate,
-  #dateselector-container #nextdate {
-    font-size: 9em;
+  #dateselector-container #nextdate,
+  #dateselector-container #previousdate {
+    font-size: 8.7em;
   }
   #metadata {
-    max-width: 900px;
+    max-width: 980px;
   }
-  #data td, #data th {
+  #data td,
+  #data th {
     padding: 10px 1.5rem;
   }
   #data th {
@@ -309,22 +322,24 @@ footer {
 }
 
 @media (min-width: 1900px) {
-  main,
-  footer {
+  footer,
+  main {
     padding: 0;
   }
   main {
     margin-top: 8em;
   }
+  header {
+    min-height: 215px;
+  }
+  #guslogo {
+    top: -5em;
+  }
   #dateselector-container {
-    margin-bottom: 4em;
+    margin-bottom: 3em;
     margin-left: -200px;
   }
-  #dateselector-container #dateselector {
-    font-size: 8em;
-  }
-  #dateselector-container #previousdate,
-  #dateselector-container #nextdate {
-    font-size: 12em;
+  #metadata {
+    max-width: 100%;
   }
 }

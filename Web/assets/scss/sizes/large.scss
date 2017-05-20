@@ -1,8 +1,8 @@
 // main: ../main.scss
 // min-width: 1300px
 
-main,
-footer {
+footer,
+main {
    margin: 0 auto;
 }
 
@@ -13,7 +13,7 @@ main {
 
 #guslogo {
    width: 300px;
-   top: -2em;
+   top: -3em;
    right: 0;
 }
 
@@ -22,19 +22,20 @@ main {
       font-size: 6em;
    }
 
-   #previousdate,
-   #nextdate {
-      font-size: 9em;
+   #nextdate,
+   #previousdate {
+      font-size: 8.7em;
    }
 }
 
 #metadata {
-   max-width: 900px;
+   max-width: 980px;
 }
 
 #data {
-   td, th {
-      padding: 10px 1.5rem;;
+   td,
+   th {
+      padding: 10px 1.5rem;
    }
 
    th {
