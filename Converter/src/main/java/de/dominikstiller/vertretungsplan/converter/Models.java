@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 class Vertretungsplan {
-   
+
    // Metadata
    public LocalDate date;
    public int version;
@@ -15,7 +15,7 @@ class Vertretungsplan {
    public String absentForms;
    public String absentTeachers;
    public String missingRooms;
-   
+
    public List<Entry> entries;
 }
 

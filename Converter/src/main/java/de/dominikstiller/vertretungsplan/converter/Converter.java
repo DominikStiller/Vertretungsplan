@@ -32,6 +32,7 @@ public class Converter {
    private static AmazonS3 s3;
    private static Properties config;
    private static UcanaccessConnection datebaseConnection;
+   private static ObjectMapper jsonMapper;
 
    static {
       // Use across instances to reduce cold start time
@@ -39,13 +40,18 @@ public class Converter {
       s3 = AmazonS3ClientBuilder.defaultClient();
       config = new Properties();
 
+      jsonMapper = new ObjectMapper();
+      jsonMapper.registerModule(new JavaTimeModule());
+      jsonMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+
       String environment = System.getenv().getOrDefault("VPCONVERTER_ENVIRONMENT", "Development");
       try {
          config.load(Converter.class.getResourceAsStream("/" + environment + ".properties"));
          config.put("Environment", environment);
-         config.put("DatabasePath", config.get("TempPath") + "/vp.mdb");
-      } catch (IOException ex) {
-         logger.log(Level.SEVERE, null, ex);
+         config.put("Database.LocalPath", config.get("TempPath") + "/vp.mdb");
+      } catch (Exception e) {
+         logger.log(Level.SEVERE, "ERROR while loading configuration", e);
+         System.exit(0);
       }
    }
 
@@ -56,28 +62,24 @@ public class Converter {
    public void convert() throws SQLException, IOException {
       downloadDatabase();
 
-      datebaseConnection = (UcanaccessConnection) DriverManager.getConnection("jdbc:ucanaccess://" + config.getProperty("DatabasePath"));
+      datebaseConnection = (UcanaccessConnection) DriverManager.getConnection("jdbc:ucanaccess://" + config.getProperty("Database.LocalPath"));
 
       // Read and process data
       List<Vertretungsplan> vps = getDates().stream()
               .map(this::buildVertretungsplan)
               // buildVertretungsplan returns null when exception occurs
-              // Workaround because map can't handle checked exceptions
+              // Workaround because map can not handle checked exceptions
               .filter(vp -> vp != null)
               .collect(Collectors.toList());
       datebaseConnection.close();
 
       if (config.getProperty("Environment").equals("Development")) {
          datebaseConnection.getDbIO().close();
-         Files.deleteIfExists(Paths.get(config.getProperty("DatabasePath")));
+         Files.deleteIfExists(Paths.get(config.getProperty("Database.LocalPath")));
       }
 
-      ObjectMapper mapper = new ObjectMapper();
-      mapper.registerModule(new JavaTimeModule());
-      mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-
       // Upload converted file to S3
-      s3.putObject(config.getProperty("Output.S3Bucket"), config.getProperty("Output.S3Key"), mapper.writeValueAsString(vps));
+      s3.putObject(config.getProperty("Output.S3Bucket"), config.getProperty("Output.S3Key"), jsonMapper.writeValueAsString(vps));
 
       Notifier.notifyApi(config.getProperty("Api.Host"), config.getProperty("Api.AuthInfo"));
    }
@@ -85,7 +87,7 @@ public class Converter {
    // Download database from S3
    private void downloadDatabase() throws IOException {
       S3Object database = s3.getObject(config.getProperty("Database.S3Bucket"), config.getProperty("Database.S3Key"));
-      Files.copy((InputStream) database.getObjectContent(), Paths.get(config.getProperty("DatabasePath")), StandardCopyOption.REPLACE_EXISTING);
+      Files.copy(database.getObjectContent(), Paths.get(config.getProperty("Database.LocalPath")), StandardCopyOption.REPLACE_EXISTING);
    }
 
    // Get all dates that exist
@@ -96,26 +98,26 @@ public class Converter {
    }
 
    private Vertretungsplan buildVertretungsplan(String date) {
-      Vertretungsplan vp = new Vertretungsplan();
       try {
-         fillMetadata(date, vp);
+         Vertretungsplan vp = new Vertretungsplan();
 
-         new QueryRunner().query(datebaseConnection,
+         fillMetadata(date, vp);
+         vp.entries = new QueryRunner().query(datebaseConnection,
                  "SELECT * FROM TDynTextAula WHERE Datumkurz = ?",
                  rs -> {
-                    vp.entries = new ArrayList<>();
+                    ArrayList<Entry> entries = new ArrayList<>();
                     while (rs.next()) {
-                       vp.entries.add(buildEntry(rs));
+                       entries.add(buildEntry(rs));
                     }
 
-                    return null;
+                    return entries;
                  }, date);
-      } catch (SQLException ex) {
-         logger.log(Level.SEVERE, null, ex);
+
+         return vp;
+      } catch (Exception e) {
+         logger.log(Level.SEVERE, "ERROR while building vertretungsplan", e);
          return null;
       }
-
-      return vp;
    }
 
    private void fillMetadata(String date, Vertretungsplan vp) throws SQLException {
