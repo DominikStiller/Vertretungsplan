@@ -91,13 +91,12 @@ namespace DominikStiller.VertretungsplanUploader.UI
             try
             {
                 UploadToS3();
+                MessageBox.Show(this, UIStrings.PublishSuccessDialog_Content, UIStrings.PublishSuccessDialog_Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (IOException)
             {
                 MessageBox.Show(this, UIStrings.IOExceptionDialog_Content, UIStrings.Error, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
             }
-            MessageBox.Show(this, UIStrings.PublishSuccessDialog_Content, UIStrings.PublishSuccessDialog_Title, MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void DatabasePathChanged()
@@ -150,6 +149,7 @@ namespace DominikStiller.VertretungsplanUploader.UI
 
         private void notifyIcon_Click(object sender, EventArgs e)
         {
+            // Restore window on click on notification area icon
             if (((MouseEventArgs)e).Button == MouseButtons.Left)
             {
                 Show();
@@ -157,7 +157,7 @@ namespace DominikStiller.VertretungsplanUploader.UI
             }
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void exitMenuItem_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show(this, UIStrings.ExitConfirmationDialog_Content, UIStrings.ExitConfirmationDialog_Title, MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
             if (result == DialogResult.Yes)

@@ -107,7 +107,7 @@ namespace DominikStiller.VertretungsplanUploader.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dies ist ein Helfer-Programm, um den Online-Vertretungsplan zu aktualisieren. Es arbeitet selbstständig im Hintergrund und lädt die neue Version automatisch hoch, das Hochladen kann aber auch manuell ausgelöst werden.
+        ///   Looks up a localized string similar to Dies ist ein Helfer-Programm, um den Online-Vertretungsplan zu aktualisieren. Es arbeitet selbstständig im Hintergrund und lädt neue Versionen automatisch hoch, das Hochladen kann aber auch manuell gestartet werden.
         ///
         ///Bei Fragen wenden Sie sich bitte an Dominik Stiller (domi.stiller@gmail.com)..
         /// </summary>
@@ -127,7 +127,7 @@ namespace DominikStiller.VertretungsplanUploader.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Es ist ein Dateifehler aufgetreten. Möglicherweise wird die Datei gerade von einem anderen Programm benutzt. Der Vertretungsplan wurde nicht veröffentlicht..
+        ///   Looks up a localized string similar to Es ist ein Dateifehler aufgetreten. Möglicherweise wird die ausgewählte Datei gerade von einem anderen Programm verwendet. Der Vertretungsplan wurde nicht veröffentlicht..
         /// </summary>
         internal static string IOExceptionDialog_Content {
             get {

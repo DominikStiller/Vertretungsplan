@@ -137,12 +137,12 @@ Wenn sie es minimieren werden Änderungen weiter im Hintergrund veröffentlicht.
     <value>Informationen über das Programm</value>
   </data>
   <data name="InfoDialog_Content" xml:space="preserve">
-    <value>Dies ist ein Helfer-Programm, um den Online-Vertretungsplan zu aktualisieren. Es arbeitet selbstständig im Hintergrund und lädt die neue Version automatisch hoch, das Hochladen kann aber auch manuell ausgelöst werden.
+    <value>Dies ist ein Helfer-Programm, um den Online-Vertretungsplan zu aktualisieren. Es arbeitet selbstständig im Hintergrund und lädt neue Versionen automatisch hoch, das Hochladen kann aber auch manuell gestartet werden.
 
 Bei Fragen wenden Sie sich bitte an Dominik Stiller (domi.stiller@gmail.com).</value>
   </data>
   <data name="IOExceptionDialog_Content" xml:space="preserve">
-    <value>Es ist ein Dateifehler aufgetreten. Möglicherweise wird die Datei gerade von einem anderen Programm benutzt. Der Vertretungsplan wurde nicht veröffentlicht.</value>
+    <value>Es ist ein Dateifehler aufgetreten. Möglicherweise wird die ausgewählte Datei gerade von einem anderen Programm verwendet. Der Vertretungsplan wurde nicht veröffentlicht.</value>
   </data>
   <data name="ExitConfirmationDialog_Title" xml:space="preserve">
     <value>Programm beenden</value>
