@@ -39,7 +39,6 @@ namespace DominikStiller.VertretungsplanServer.Models
         }
     }
 
-
     public enum VertretungsplanType
     {
         STUDENTS, TEACHERS

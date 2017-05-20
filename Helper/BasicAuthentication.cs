@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace DominikStiller.VertretungsplanServer.Helper
@@ -11,10 +9,11 @@ namespace DominikStiller.VertretungsplanServer.Helper
     {
         public static IActionResult Auth(string username, string password, HttpContext context, Action authorizedCallback)
         {
-            var authHeader = context.Request.Headers["Authorization"];
-            if (!string.IsNullOrEmpty(authHeader) && authHeader.ToString().StartsWith("Basic "))
+            var authHeader = context.Request.Headers["Authorization"].ToString();
+
+            if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Basic "))
             {
-                var authParts = Encoding.ASCII.GetString(Convert.FromBase64String(authHeader.ToString().Substring(6))).Split(':');
+                var authParts = Encoding.ASCII.GetString(Convert.FromBase64String(authHeader.Substring(6))).Split(':');
                 if (authParts.Length == 2)
                 {
                     var requestUsername = authParts[0];
@@ -28,6 +27,8 @@ namespace DominikStiller.VertretungsplanServer.Helper
                     }
                 }
             }
+
+            // No valid authentication information supplied
             context.Response.Headers.Add("WWW-Authenticate", "Basic");
             return new UnauthorizedResult();
         }
