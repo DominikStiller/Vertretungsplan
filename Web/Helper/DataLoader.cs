@@ -40,7 +40,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
                 }
                 catch (Exception e)
                 {
-                    logger.LogError($"[ERROR] while loading data\n{e}");
+                    logger.LogError($"ERROR while loading data\n{e}");
                 }
             }, null, 0, 2000);
         }

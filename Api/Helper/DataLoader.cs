@@ -46,7 +46,7 @@ namespace DominikStiller.VertretungsplanServer.Api.Helper
             }
             catch (Exception e)
             {
-                logger.LogError($"[ERROR] while loading data\n{e}");
+                logger.LogError($"ERROR while loading data\n{e}");
             }
         }
     }
