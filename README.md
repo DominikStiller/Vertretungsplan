@@ -49,5 +49,18 @@ For development, I use Visual Studio 2017 with the following extensions:
 * [AWS Toolkit](http://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/getting-set-up.html) for easy deployment to Amazon EC2 using AWS Elastic Beanstalk
 
 
+## External libraries
+The following libraries created by other entities are used by this software:
+
+* [Apache Commons DbUtils](https://commons.apache.org/proper/commons-dbutils/)
+* [AWS Logging .NET](https://github.com/aws/aws-logging-dotnet)
+* [AWS SDK for Java](https://aws.amazon.com/sdk-for-java/)
+* [AWS SDK for .NET](https://aws.amazon.com/sdk-for-net/)
+* [BundlerMinifier](https://github.com/madskristensen/BundlerMinifier)
+* [Jackson](https://github.com/FasterXML/jackson)
+* [Json.NET](http://www.newtonsoft.com/json)
+* [UCanAccess](http://ucanaccess.sourceforge.net)
+
+
 ## License
 This project is licensed under the terms of the MIT license. See [LICENSE.md](LICENSE.md) for further information.
