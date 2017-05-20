@@ -47,3 +47,7 @@ Api and Web are written in ASP.NET Core for high performance and cross-platform 
 For development, I use Visual Studio 2017 with the following extensions:
 * [BundlerMinifier](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BundlerMinifier) for minifying CSS and JavaScript files as soon as they have been changed
 * [AWS Toolkit](http://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/getting-set-up.html) for easy deployment to Amazon EC2 using AWS Elastic Beanstalk
+
+
+## License
+This project is licensed under the terms of the MIT license. See [LICENSE.md](LICENSE.md) for further information.
