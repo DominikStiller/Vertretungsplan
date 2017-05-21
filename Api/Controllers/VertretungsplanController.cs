@@ -36,9 +36,7 @@ namespace DominikStiller.VertretungsplanServer.Api.Controllers
 
             // List dates
             if (Request.Query.ContainsKey("metadata"))
-                return Ok(vps.Select(
-                    vp => new { vp.Date, vp.Version, vp.LastUpdated }
-                ));
+                return Ok(vps.Select(vp => new VertretungsplanMetadata(vp)));
             // Show data (all dates)
             else
                 return Ok(vps);
@@ -62,8 +60,15 @@ namespace DominikStiller.VertretungsplanServer.Api.Controllers
         {
             return BasicAuthentication.Auth("update", options.UpdatePassword, HttpContext, async () =>
             {
+                var metadataBeforeUpdate = cache.GetAll().Select(vp => new VertretungsplanMetadata(vp)).ToList();
                 await dataLoader.LoadDataFromS3();
-                await notifier.NotifyFCM();
+                var metadataAfterUpdate = cache.GetAll().Select(vp => new VertretungsplanMetadata(vp)).ToList();
+
+                // Only send notification if data has changed
+                if (!metadataAfterUpdate.SequenceEqual(metadataBeforeUpdate))
+                {
+                    await notifier.NotifyFCM();
+                }
             });
         }
     }

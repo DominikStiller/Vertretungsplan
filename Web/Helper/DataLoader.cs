@@ -53,15 +53,16 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
             {
                 var json = await response.Content.ReadAsStringAsync();
 
-                var dates = JsonConvert.DeserializeObject<List<Vertretungsplan>>(json);
-                foreach (var e in dates)
+                var dates = JsonConvert.DeserializeObject<List<VertretungsplanMetadata>>(json);
+                foreach (var loaded in dates)
                 {
-                    var date = e.Date;
-                    var dateExists = cache.Contains(date);
+                    var cached = cache.Find(loaded.Date);
+                    var dateExists = cached != null;
+
                     // New or more recent than existing version
-                    if (!dateExists || e.LastUpdated > cache.Find(date).LastUpdated)
+                    if (!dateExists || loaded.LastUpdated > cached.LastUpdated || loaded.Version > cached.Version)
                     {
-                        var dateResponse = await client.GetAsync("/dates/" + date.ToString("yyyy-MM-dd"));
+                        var dateResponse = await client.GetAsync("/dates/" + loaded.Date.ToString("yyyy-MM-dd"));
                         var dateJson = await dateResponse.Content.ReadAsStringAsync();
 
                         var vp = JsonConvert.DeserializeObject<Vertretungsplan>(dateJson);
@@ -69,10 +70,10 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
                     }
                 }
 
-                var oldDates = cache.GetAllDates().ToList().Except(dates.Select(vp => vp.Date));
-                foreach (var vp in oldDates)
+                var oldDates = cache.GetAllDates().Except(dates.Select(vp => vp.Date));
+                foreach (var old in oldDates)
                 {
-                    cache.Remove(vp);
+                    cache.Remove(old);
                 }
             }
         }
