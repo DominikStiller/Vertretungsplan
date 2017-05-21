@@ -47,7 +47,7 @@
             // 
             // openFileDialog
             // 
-            this.openFileDialog.Filter = "Datenbank|TS-Internet.mdb";
+            this.openFileDialog.Filter = "Datenbanken|*.mdb";
             this.openFileDialog.Title = "Vertretungsplan-Datenbank auswählen";
             // 
             // pathTextBox
@@ -140,12 +140,12 @@
             this.notifyIconMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exitMenuItem});
             this.notifyIconMenu.Name = "notifyIconMenu";
-            this.notifyIconMenu.Size = new System.Drawing.Size(153, 48);
+            this.notifyIconMenu.Size = new System.Drawing.Size(121, 26);
             // 
             // exitMenuItem
             // 
             this.exitMenuItem.Name = "exitMenuItem";
-            this.exitMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitMenuItem.Size = new System.Drawing.Size(120, 22);
             this.exitMenuItem.Text = "Beenden";
             this.exitMenuItem.Click += new System.EventHandler(this.exitMenuItem_Click);
             // 

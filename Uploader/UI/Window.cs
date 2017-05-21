@@ -33,7 +33,6 @@ namespace DominikStiller.VertretungsplanUploader.UI
 
             watcher = new FileSystemWatcher();
             watcher.NotifyFilter = NotifyFilters.LastWrite;
-            watcher.Filter = "TS-Internet.mdb";
             watcher.Changed += (source, e) =>
             {
                 // Do not show messages if the upload was triggered automatically
@@ -108,6 +107,7 @@ namespace DominikStiller.VertretungsplanUploader.UI
             uploadButton.Enabled = true;
 
             watcher.Path = Path.GetDirectoryName(database);
+            watcher.Filter = Path.GetFileName(database);
             watcher.EnableRaisingEvents = true;
         }
 
