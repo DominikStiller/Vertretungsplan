@@ -228,11 +228,11 @@ header {
 }
 
 #data th {
-  padding: 10px;
+  padding: 10px 8px;
 }
 
 #data td {
-  padding: 4px 7px;
+  padding: 3px 8px;
 }
 
 footer {
@@ -244,8 +244,11 @@ footer {
 }
 
 @media (min-width: 500px) {
+  #data th {
+    padding: 10px;
+  }
   #data td {
-    padding: 7px 10px;
+    padding: 6px 10px;
   }
 }
 
@@ -267,7 +270,6 @@ footer {
   #dateselector-container #nextdate,
   #dateselector-container #previousdate {
     font-size: 4.4em;
-    padding: 1rem;
   }
   #guslogo {
     display: block;
@@ -280,11 +282,11 @@ footer {
   }
   #data td,
   #data th {
-    padding: 10px 1rem;
+    padding: 8px 1rem;
   }
   #data th {
-    padding-top: 18px;
-    padding-bottom: 18px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     font-size: 1.2em;
   }
   #data tbody tr {
@@ -339,8 +341,8 @@ footer {
     padding: 10px 1.5rem;
   }
   #data th {
-    padding-top: 18px;
-    padding-bottom: 18px;
+    padding-top: 15px;
+    padding-bottom: 15px;
   }
   footer {
     margin-bottom: 4em;
