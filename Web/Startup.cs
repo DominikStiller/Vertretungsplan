@@ -32,6 +32,12 @@ namespace DominikStiller.VertretungsplanServer.Web
             services.AddOptions();
             services.Configure<DataLoaderOptions>(Configuration.GetSection("DataLoader"));
 
+            // Requests through Chrome Data Saver cause "Parameter count mismatch between X-Forwarded-For and X-Forwarded-Proto" otherwise
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.RequireHeaderSymmetry = false;
+            });
+
             services.AddMvc();
 
             services.AddSingleton<VertretungsplanRepository, VertretungsplanRepository>();
