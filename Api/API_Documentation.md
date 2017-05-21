@@ -3,9 +3,10 @@ This is the documentation for the REST API of the Vertretungsplan API server.
 
 Every response body JSON-formatted and UTF-8-encoded.
 
-The implementation can be found in Controllers\VertretungsplanController.cs
+The implementation can be found in [VertretungsplanController.cs](Controllers/VertretungsplanController.cs)
 
 ## Operations
+These are the available operations:
 
 ### List dates
 List the dates including metadata.

@@ -22,7 +22,7 @@ Api is an API server intended to run on Amazon EC2 using AWS Elastic Beanstalk.
 The `Update data` operation loads the JSON file from S3 and sends a notification to Firebase Cloud Messaging.
 The data is then accessible to Web and other clients (such as a mobile applications).
 
-The [API documentation](Api/API Documentation.md) describes the available operations.
+Refer to the [API documentation](Api/API_Documentation.md) for more details.
 
 ### Web
 Web is the website server intended to run on Amazon EC2 using AWS Elastic Beanstalk.
