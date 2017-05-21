@@ -5,9 +5,9 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 
 using DominikStiller.VertretungsplanServer.Models;
-using System.Threading.Tasks;
 
 namespace DominikStiller.VertretungsplanServer.Api.Helper
 {
