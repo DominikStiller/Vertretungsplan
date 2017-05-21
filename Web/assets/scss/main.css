@@ -10,7 +10,7 @@ html {
 
 body {
   margin: 0;
-  font-family: "Liberation-Sans", Arial, sans-serif;
+  font-family: "Liberation-Sans", sans-serif;
   line-height: 1.5em;
   color: #333;
   background-color: #f1f1f1;
@@ -27,7 +27,6 @@ main {
 }
 
 header {
-  margin-bottom: 2em;
   position: relative;
 }
 
@@ -40,6 +39,7 @@ header {
 }
 
 #dateselector-container {
+  font-family: mr-eaves-sans, sans-serif;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -47,9 +47,7 @@ header {
 }
 
 #dateselector-container #dateselector {
-  font-family: mr-eaves-sans, sans-serif;
-  font-style: normal;
-  font-weight: 200;
+  font-family: inherit;
   border: 0;
   outline: 0;
   margin: 0 -4px;
@@ -72,7 +70,6 @@ header {
 
 #dateselector-container #nextdate,
 #dateselector-container #previousdate {
-  font-family: mr-eaves-sans, sans-serif;
   font-weight: bold;
   cursor: pointer;
   padding: 1rem;
@@ -133,7 +130,8 @@ header {
 .colorstripe td {
   padding: 0 !important;
   height: 5px !important;
-  background: linear-gradient(to right, #5ac7d3, #273f86), #438bb1;
+  background-color: #438bb1;
+  background-image: linear-gradient(to right, #5ac7d3, #273f86);
 }
 
 footer {
@@ -196,6 +194,10 @@ main {
   margin-top: 2em;
 }
 
+header {
+  margin-bottom: 1em;
+}
+
 #guslogo {
   display: none;
 }
@@ -206,7 +208,8 @@ main {
 }
 
 #dateselector-container #dateselector {
-  font-size: 7vw;
+  font-size: 2em;
+  font-weight: bold;
   padding: 6px 15px;
   background-color: #ccc;
   text-align-last: center;
@@ -214,19 +217,11 @@ main {
 
 #dateselector-container #nextdate,
 #dateselector-container #previousdate {
-  font-size: 10.3vw;
-}
-
-#dateselector-container #previousdate {
-  padding-right: .7rem;
-}
-
-#dateselector-container #nextdate {
-  padding-left: .7rem;
+  font-size: 2.9em;
 }
 
 #data {
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 #data th {
@@ -234,7 +229,7 @@ main {
 }
 
 #data td {
-  padding: 5px 10px;
+  padding: 4px 7px;
 }
 
 footer {
@@ -246,16 +241,6 @@ footer {
 }
 
 @media (min-width: 500px) {
-  #dateselector-container #dateselector {
-    font-size: 2em;
-  }
-  #dateselector-container #nextdate,
-  #dateselector-container #previousdate {
-    font-size: 2.9em;
-  }
-  #data {
-    overflow-x: visible;
-  }
   #data td {
     padding: 7px 10px;
   }
@@ -266,10 +251,12 @@ footer {
     font-size: 16px;
   }
   header {
+    margin-bottom: 2em;
     min-height: 245px;
   }
   #dateselector-container #dateselector {
     font-size: 3em;
+    font-weight: normal;
     background: transparent;
     padding: 0;
     text-align-last: left;
