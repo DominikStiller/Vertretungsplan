@@ -71,7 +71,6 @@ header {
 #dateselector-container #nextdate,
 #dateselector-container #previousdate {
   font-weight: bold;
-  cursor: pointer;
   padding: 1rem;
 }
 
@@ -145,6 +144,10 @@ footer #copyright {
 footer a {
   text-decoration: none;
   color: #333;
+}
+
+a {
+  cursor: pointer;
 }
 
 .message {
