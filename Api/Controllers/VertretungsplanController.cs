@@ -13,15 +13,15 @@ namespace DominikStiller.VertretungsplanServer.Api.Controllers
     [Route("dates")]
     public class VertretungsplanController : Controller
     {
-        readonly VertretungsplanRepository vertretungsplanRepository;
+        readonly VertretungsplanRepository cache;
         readonly DataLoader dataLoader;
         readonly Notifier notifier;
         readonly VertretungsplanControllerOptions options;
 
 
-        public VertretungsplanController(VertretungsplanRepository vertretungsplanRepository, DataLoader dataLoader, Notifier notifier, IOptions<VertretungsplanControllerOptions> options)
+        public VertretungsplanController(VertretungsplanRepository cache, DataLoader dataLoader, Notifier notifier, IOptions<VertretungsplanControllerOptions> options)
         {
-            this.vertretungsplanRepository = vertretungsplanRepository;
+            this.cache = cache;
             this.dataLoader = dataLoader;
             this.notifier = notifier;
             this.options = options.Value;
@@ -30,7 +30,7 @@ namespace DominikStiller.VertretungsplanServer.Api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            IEnumerable<Vertretungsplan> vps = vertretungsplanRepository.GetAll();
+            IEnumerable<Vertretungsplan> vps = cache.GetAll();
             if (Request.Query.ContainsKey("hidepast"))
                 vps = vps.Where(vp => vp.Date >= VertretungsplanTime.Now.Date);
 
@@ -48,7 +48,7 @@ namespace DominikStiller.VertretungsplanServer.Api.Controllers
         [HttpGet("{date}")]
         public IActionResult Get(DateTime date)
         {
-            var vertretungsplan = vertretungsplanRepository.Find(date);
+            var vertretungsplan = cache.Find(date);
             if (vertretungsplan == null)
             {
                 return NotFound();

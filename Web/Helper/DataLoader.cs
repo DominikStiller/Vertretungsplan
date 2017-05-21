@@ -14,16 +14,16 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
 {
     public class DataLoader
     {
-        readonly VertretungsplanRepository vertretungsplanRepository;
+        readonly VertretungsplanRepository cache;
         readonly ILogger logger;
 
         HttpClient client;
         // Keep reference to prevent GC
         Timer timer;
 
-        public DataLoader(VertretungsplanRepository vertretungsplanRepository, ILogger<DataLoader> logger, IOptions<DataLoaderOptions> options)
+        public DataLoader(VertretungsplanRepository cache, ILogger<DataLoader> logger, IOptions<DataLoaderOptions> options)
         {
-            this.vertretungsplanRepository = vertretungsplanRepository;
+            this.cache = cache;
             this.logger = logger;
 
             client = new HttpClient();
@@ -57,22 +57,22 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
                 foreach (var e in dates)
                 {
                     var date = e.Date;
-                    var dateExists = vertretungsplanRepository.Contains(date);
+                    var dateExists = cache.Contains(date);
                     // New or more recent than existing version
-                    if (!dateExists || e.LastUpdated > vertretungsplanRepository.Find(date).LastUpdated)
+                    if (!dateExists || e.LastUpdated > cache.Find(date).LastUpdated)
                     {
                         var dateResponse = await client.GetAsync("/dates/" + date.ToString("yyyy-MM-dd"));
                         var dateJson = await dateResponse.Content.ReadAsStringAsync();
 
                         var vp = JsonConvert.DeserializeObject<Vertretungsplan>(dateJson);
-                        vertretungsplanRepository.Add(vp);
+                        cache.Add(vp);
                     }
                 }
 
-                var oldDates = vertretungsplanRepository.GetAllDates().ToList().Except(dates.Select(vp => vp.Date));
+                var oldDates = cache.GetAllDates().ToList().Except(dates.Select(vp => vp.Date));
                 foreach (var vp in oldDates)
                 {
-                    vertretungsplanRepository.Remove(vp);
+                    cache.Remove(vp);
                 }
             }
         }

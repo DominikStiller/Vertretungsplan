@@ -13,15 +13,15 @@ namespace DominikStiller.VertretungsplanServer.Api.Helper
 {
     public class DataLoader
     {
-        readonly VertretungsplanRepository vertretungsplanRepository;
+        readonly VertretungsplanRepository cache;
         readonly ILogger logger;
         readonly DataLoaderOptions options;
 
         AmazonS3Client s3;
 
-        public DataLoader(VertretungsplanRepository vertretungsplanRepository, ILogger<DataLoader> logger, IOptions<DataLoaderOptions> options)
+        public DataLoader(VertretungsplanRepository cache, ILogger<DataLoader> logger, IOptions<DataLoaderOptions> options)
         {
-            this.vertretungsplanRepository = vertretungsplanRepository;
+            this.cache = cache;
             this.logger = logger;
             this.options = options.Value;
 
@@ -41,8 +41,8 @@ namespace DominikStiller.VertretungsplanServer.Api.Helper
                 }
 
                 var vps = JsonConvert.DeserializeObject<List<Vertretungsplan>>(json);
-                vertretungsplanRepository.Clear();
-                vertretungsplanRepository.AddRange(vps);
+                cache.Clear();
+                cache.AddRange(vps);
             }
             catch (Exception e)
             {

@@ -13,11 +13,10 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
         const string DATEFORMAT_INTERNAL = "yyyy-MM-dd";
         const string DATEFORMAT_PUBLIC = "dddd, dd.MM";
 
-        public static VertretungsplanViewModel GenerateViewModel(VertretungsplanRepository vertretungsplanRepository, VertretungsplanType type, DateTime? date = null)
+        public static VertretungsplanViewModel GenerateViewModel(VertretungsplanRepository cache, VertretungsplanType type, DateTime? date = null)
         {
-
             var model = new VertretungsplanViewModel();
-            var vertretungsplan = vertretungsplanRepository.FindNearest(date ?? VertretungsplanTime.Now);
+            var vertretungsplan = cache.FindNearest(date ?? VertretungsplanTime.Now);
 
             model.Vertretungsplan = vertretungsplan;
 
@@ -50,10 +49,10 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
 
                 model.LastUpdatedInWords = TimespanInWords(VertretungsplanTime.Now - model.Vertretungsplan.LastUpdated);
 
-                model.Dates = vertretungsplanRepository.GetAllDates().Select(d => d.ToString(DATEFORMAT_INTERNAL)).ToList();
-                model.PreviousDate = vertretungsplanRepository.GetPrevious(vertretungsplan).Date;
-                model.NextDate = vertretungsplanRepository.GetNext(vertretungsplan).Date;
-                model.DateSelectorItems = vertretungsplanRepository.GetAllDates().Select(dateOption =>
+                model.Dates = cache.GetAllDates().Select(d => d.ToString(DATEFORMAT_INTERNAL)).ToList();
+                model.PreviousDate = cache.GetPrevious(vertretungsplan).Date;
+                model.NextDate = cache.GetNext(vertretungsplan).Date;
+                model.DateSelectorItems = cache.GetAllDates().Select(dateOption =>
                 {
                     return new SelectListItem()
                     {

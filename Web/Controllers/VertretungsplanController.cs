@@ -11,35 +11,35 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
 {
     public class VertretungsplanController : Controller
     {
-        readonly VertretungsplanRepository vertretungsplanRepository;
+        readonly VertretungsplanRepository cache;
 
-        public VertretungsplanController(VertretungsplanRepository vertretungsplanRepository)
+        public VertretungsplanController(VertretungsplanRepository cache)
         {
-            this.vertretungsplanRepository = vertretungsplanRepository;
+            this.cache = cache;
         }
 
         [Route("/")]
         public IActionResult Students()
         {
-            return View(GenerateViewModel(vertretungsplanRepository, VertretungsplanType.STUDENTS));
+            return View(GenerateViewModel(cache, VertretungsplanType.STUDENTS));
         }
 
         [Route("/ajax/students/{date}")]
         public IActionResult StudentsAjax(DateTime date)
         {
-            return PartialView("Students", GenerateViewModel(vertretungsplanRepository, VertretungsplanType.STUDENTS, date));
+            return PartialView("Students", GenerateViewModel(cache, VertretungsplanType.STUDENTS, date));
         }
 
         [Route("/lehrer")]
         public IActionResult Teachers()
         {
-            return View(GenerateViewModel(vertretungsplanRepository, VertretungsplanType.TEACHERS));
+            return View(GenerateViewModel(cache, VertretungsplanType.TEACHERS));
         }
 
         [Route("/ajax/teachers/{date}")]
         public IActionResult TeachersAjax(DateTime date)
         {
-            return PartialView("Teachers", GenerateViewModel(vertretungsplanRepository, VertretungsplanType.TEACHERS, date));
+            return PartialView("Teachers", GenerateViewModel(cache, VertretungsplanType.TEACHERS, date));
         }
     }
 
