@@ -13,19 +13,19 @@ When exporting, Time Substitute writes the substitution schedule to TS-Internet.
 Uploader watches this file in a selected location and uploads it into an Amazon S3 bucket when changes are detected.
 
 ### Converter
-Converter is intended to run as a function in AWS Lambda, triggered by the upload of the database file to S3.
+Converter is intended to run as a function on AWS Lambda, triggered by the upload of the database file to S3.
 It converts the data from the database into JSON, formatting data and removing unnecessary information in the process, and uploads the converted file to S3.
 Converter then notifies Api that a new version is available.
 
 ### Api
-Api is an API server intended to run in an Amazon EC2 instance (t2.nano or t2.micro) and be deployed using AWS Elastic Beanstalk.
-The JSON file is loaded from S3 at startup and upon invocation of the `Update data` operation.
+Api is an API server intended to run on Amazon EC2 using AWS Elastic Beanstalk.
+The `Update data` operation loads the JSON file from S3 and sends a notification to Firebase Cloud Messaging.
 The data is then accessible to Web and other clients (such as a mobile applications).
 
-The API documentation can be found in the Api directory.
+The [API documentation](Api/API Documentation.md) describes the available operations.
 
 ### Web
-Web is the server for the website intended to run in an Amazon EC2 instance (t2.micro) and be deployed using AWS Elastic Beanstalk.
+Web is the website server intended to run on Amazon EC2 using AWS Elastic Beanstalk.
 It periodically checks with Api for new or updated data.
 After loading, the data is then served as a responsive website.
 There is a student and a teacher version, displaying the same data but with different filtering, formatting and arrangement.
