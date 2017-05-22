@@ -70,7 +70,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
                     }
                 }
 
-                var oldDates = cache.GetAllDates().Except(dates.Select(vp => vp.Date));
+                var oldDates = cache.GetAllDates().Except(dates.Select(vp => vp.Date)).ToList();
                 foreach (var old in oldDates)
                 {
                     cache.Remove(old);
