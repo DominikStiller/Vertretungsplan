@@ -257,7 +257,7 @@ footer {
     font-size: 16px;
   }
   header {
-    margin-bottom: 2em;
+    margin-bottom: 1.5em;
     min-height: 245px;
   }
   #dateselector-container #dateselector {
@@ -338,7 +338,7 @@ footer {
   }
   #data td,
   #data th {
-    padding: 10px 1.5rem;
+    padding: 8px 1.5rem;
   }
   #data th {
     padding-top: 15px;
