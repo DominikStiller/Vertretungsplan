@@ -18,9 +18,9 @@
 
     <header>
         <div id="dateselector-container">
-            <a id="previousdate" title="@Model.PreviousDate.ToString(Model.DateformatPublic)" data-date="@Model.PreviousDate.ToString(Model.DateformatInternal)">&lsaquo;</a>
-            <select asp-items="@Model.DateSelectorItems" id="dateselector"></select>
-            <a id="nextdate" title="@Model.NextDate.ToString(Model.DateformatPublic)" data-date="@Model.NextDate.ToString(Model.DateformatInternal)">&rsaquo;</a>
+            <a id="previousdate" title="Zu @Model.PreviousDate.ToString(Model.DateformatPublic)" data-date="@Model.PreviousDate.ToString(Model.DateformatInternal)">&lsaquo;</a>
+            <select asp-items="@Model.DateSelectorItems" id="dateselector" title="@Vertretungsplan.Date.ToString(Model.DateformatPublic + "yyyy")"></select>
+            <a id="nextdate" title="Zu @Model.NextDate.ToString(Model.DateformatPublic)" data-date="@Model.NextDate.ToString(Model.DateformatInternal)">&rsaquo;</a>
         </div>
         <dl id="metadata">
             <dt>Zuletzt aktualisiert:</dt>
@@ -41,7 +41,7 @@
                 <dd>@Vertretungsplan.MissingRooms</dd>
             }
         </dl>
-        <a href="http://www.gymnasium-unterrieden.de/"><img src="/images/logo_gus.png" id="guslogo"></a>
+        <a href="http://www.gymnasium-unterrieden.de/"><img src="/images/logo_gus.png" id="guslogo" alt="Logo des Gymnasium Unterrieden Sindelfingen"></a>
     </header>
     <section id="data">
         @if (Vertretungsplan.Entries.Count > 0)

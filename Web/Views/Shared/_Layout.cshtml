@@ -7,14 +7,15 @@
     <meta name="robots" content="none">
     <meta name="description" content="Vertretungsplan des Gymnasium Unterrieden Sindelfingen">
     <meta name="theme-color" content="#eee">
-    <link rel="shortcut icon" type="image/png" href="/images/icon.png">
+    <link rel="icon" type="image/png" href="/images/icon.png">
+    <link rel="apple-touch-icon" href="/images/icon.png">
     <link rel="stylesheet" href="/main.min.css">
     @RenderSection("LightweightScripts", false)
+    <script src="https://use.typekit.net/hii3spj.js"></script>
+    <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
     @if (!ViewData.ContainsKey("Lightweight"))
     {
         @RenderSection("Scripts", false)
-        <script src="https://use.typekit.net/hii3spj.js"></script>
-        <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
         <script src="/main.min.js"></script>
         <environment names="Production">

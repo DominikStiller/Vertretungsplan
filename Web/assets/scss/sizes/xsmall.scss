@@ -1,17 +1,14 @@
 // main: ../main.scss
 // min-width: 0px
 
-body {
-   font-size: 14px;
-}
-
 footer,
 main {
    padding: 0 1em;
 }
 
 main {
-   margin-top: 2em;
+   margin-top: 1.2em;
+   margin-bottom: 1.2em;
 }
 
 header {
@@ -23,21 +20,28 @@ header {
 }
 
 #dateselector-container {
-   margin-bottom: 2em;
-   // Compensate for #previousdate padding
-   margin-left: -1rem;
+   padding-bottom: 1.2em;
+   border-bottom: 1px solid #ccc;
 
    #dateselector {
-      font-size: 2em;
+      font-size: 1.8em;
       font-weight: bold;
-      padding: 6px 15px;
+      padding: 5px 10px;
       background-color: #ccc;
       text-align-last: center;
    }
 
    #nextdate,
    #previousdate {
-      font-size: 2.9em;
+      font-size: 2.3em;
+      display: inline-block;
+      transform: scale(1.5) translateY(-1px);
+      line-height: 0;
+   }
+
+   #previousdate {
+      // Compensate for padding
+      margin-left: -1rem;
    }
 }
 
@@ -45,18 +49,23 @@ header {
    overflow-x: auto;
 
    th {
-      padding: 10px 8px;
+      padding: 7px 8px;
+      font-size: .9em;
    }
 
    td {
-      padding: 3px 8px;
+      padding: 5px 8px;
    }
 }
 
+.colorstripe td {
+   height: 3px !important;
+}
+
 footer {
-   margin-bottom: 1.5em;
+   margin-bottom: 1.2em;
 }
 
 .message div {
-   font-size: 2rem;
+   font-size: 2em;
 }

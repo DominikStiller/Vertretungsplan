@@ -13,21 +13,22 @@ html {
 
 body {
    margin: 0;
-   font-family: $font-liberationsans;
-   line-height: 1.5em;
+   font-family: $font-main;
+   font-size: 14px;
+   line-height: 1.43;
    color: $font-color;
    background-color: $body-color;
 }
 
 footer,
 main {
-   max-width: 1300px;
+   max-width: 1100px;
+   margin: 0 auto;
 }
 
 main {
    // For IE
    display: block;
-   margin-bottom: 1.5em;
 }
 
 header {
@@ -40,11 +41,12 @@ header {
 }
 
 #dateselector-container {
-   font-family: $font-mreaves;
+   font-family: $font-heading;
    @include not-selectable();
 
    #dateselector {
       font-family: inherit;
+      color: $font-color;
       border: 0;
       outline: 0;
       // Compensate for inline-block spacing
@@ -58,6 +60,9 @@ header {
 
       option {
          background-color: #ccc;
+         font-size: .7em;
+         // Needed for Firefox so it does not cut off text due to smaller font size
+         padding-bottom: .5em;
 
          &[selected=selected] {
             // Hide currently selected date
@@ -95,6 +100,11 @@ header {
       text-align: left;
       width: 100%;
    }
+
+   td,
+   th {
+      white-space: nowrap;
+   }
    // Colors
    thead tr {
       background-color: #ccc;
@@ -114,12 +124,12 @@ header {
       }
    }
    // Round borders
-   th {
-      &:first-child {
+   thead {
+      th:first-child {
          border-top-left-radius: $border-radius;
       }
 
-      &:last-child {
+      th:last-child {
          border-top-right-radius: $border-radius;
       }
    }
@@ -137,9 +147,8 @@ header {
 
 .colorstripe td {
    padding: 0 !important;
-   height: 5px !important;
    // Fallback color for browsers not supporting gradients
-   background-color: #438bb1;
+   background-color: $cyan-blue;
    background-image: linear-gradient(to right, $cyan, $blue);
 }
 
@@ -172,14 +181,30 @@ a {
 .running-text {
    margin-bottom: 2em;
 
+   h1,
+   h2,
+   h3 {
+      font-family: $font-heading;
+      line-height: 1.2;
+   }
+
+   h1 {
+      font-size: 3em;
+      margin-bottom: .5rem;
+   }
+
    h2 {
-      margin-top: 2em;
+      font-size: 2em;
+      margin: 2rem 0 .3rem;
    }
 
    h3 {
-      margin-bottom: 3px;
+      font-size: 1.5em;
+      margin-bottom: .1rem;
    }
 
+   h1 + p,
+   h2 + p,
    h3 + p {
       margin-top: 0;
    }
@@ -192,5 +217,6 @@ a {
       color: $font-color;
       text-decoration: none;
       font-weight: bold;
+      overflow-wrap: break-word;
    }
 }

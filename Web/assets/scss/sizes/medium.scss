@@ -1,8 +1,14 @@
 // main: ../main.scss
-// min-width: 1000px
+// min-width: 800px
 
-body {
-   font-size: 16px;
+footer,
+main {
+   padding: 0 2em;
+}
+
+main {
+   margin-top: 2em;
+   margin-bottom: 1.5em;
 }
 
 header {
@@ -12,43 +18,45 @@ header {
 }
 
 #dateselector-container {
+   margin-bottom: 2em;
+   padding-bottom: 0;
+   border-bottom: 0;
+
    #dateselector {
-      font-size: 3em;
+      font-size: 4em;
       font-weight: normal;
       background: transparent;
       padding: 0;
-      text-align-last: left;
    }
 
    #nextdate,
    #previousdate {
-      font-size: 4.4em;
+      font-size: 5.8em;
+      display: inline;
    }
 }
 
 #guslogo {
    display: block;
-   width: 250px;
+   width: 220px;
    top: 0;
    right: 2em;
 }
 
 #metadata {
    // Metadata text should never be overlapping #guslogo
-   // Total width - (#guslogo width + #guslogo right + padding)
-   max-width: calc(100% - (250px + 2em + 3em));
+   // Total width - (#guslogo width + #guslogo right)
+   max-width: calc(100% - (250px + 2em));
 }
 
 #data {
-   td,
    th {
-      padding: 8px 1rem;
+      padding: 8px .8rem;
+      font-size: 1.2em;
    }
 
-   th {
-      padding-top: 12px;
-      padding-bottom: 12px;
-      font-size: 1.2em;
+   td {
+      padding: 6px .8rem;
    }
 
    tbody tr {
@@ -70,11 +78,19 @@ header {
    }
 }
 
+.colorstripe td {
+   height: 4px !important;
+}
+
+footer {
+   margin-bottom: 1.5em;
+}
+
 .message {
    padding: 0 2em;
    font-size: 1.5em;
 
    div {
-      font-size: 4rem;
+      font-size: 2em;
    }
 }

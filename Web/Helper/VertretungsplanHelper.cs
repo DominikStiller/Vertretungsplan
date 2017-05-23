@@ -11,7 +11,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
     class VertretungsplanHelper
     {
         const string DATEFORMAT_INTERNAL = "yyyy-MM-dd";
-        const string DATEFORMAT_PUBLIC = "dddd, dd.MM";
+        const string DATEFORMAT_PUBLIC = "dddd, dd.MM.";
 
         public static VertretungsplanViewModel GenerateViewModel(VertretungsplanRepository cache, VertretungsplanType type, DateTime? date = null)
         {
