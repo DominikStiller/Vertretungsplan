@@ -23,11 +23,9 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
             this.cache = cache;
         }
 
-        public VertretungsplanViewModel GenerateViewModel(VertretungsplanType type, DateTime? date)
+        public VertretungsplanViewModel GenerateViewModel(VertretungsplanType type, Vertretungsplan vertretungsplan)
         {
             var model = new VertretungsplanViewModel();
-
-            var vertretungsplan = cache.Find(date.GetValueOrDefault());
 
             model.Vertretungsplan = vertretungsplan;
 
@@ -60,7 +58,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
 
                 model.LastUpdatedInWords = TimespanInWords(VertretungsplanTime.Now - model.Vertretungsplan.LastUpdated);
 
-                model.Dates = cache.GetAllDates().Where(vp => vp.Date != vertretungsplan.Date).Select(d => d.ToString(DATEFORMAT_INTERNAL)).ToList();
+                model.Dates = cache.GetAllDates().Where(e => e.Date != vertretungsplan.Date).Select(d => d.ToString(DATEFORMAT_INTERNAL)).ToList();
                 model.PreviousDate = cache.GetPrevious(vertretungsplan).Date;
                 model.NextDate = cache.GetNext(vertretungsplan).Date;
                 model.DateSelectorItems = cache.GetAllDates().Select(dateOption =>
@@ -102,24 +100,30 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
         }
 
         // Use md5-hashed date, last updated and version of all dates as ETag content
-        public string GenerateETag()
+        public string GenerateETagAll()
         {
             var tag = cache.GetAll().Aggregate("", (text, vp) =>
             {
-                return text + vp.Date.ToString(DATEFORMAT_INTERNAL) + vp.LastUpdated.ToString() + vp.Version;
+                return text + GenerateETagSingle(vp, false);
             });
-            var hash = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(tag));
+            return Hash(tag);
+        }
+
+        public string GenerateETagSingle(Vertretungsplan vp, bool hash)
+        {
+            var tag = vp.Date.ToString(DATEFORMAT_INTERNAL) + vp.LastUpdated.ToString() + TimespanInWords(VertretungsplanTime.Now - vp.LastUpdated) + vp.Version;
+            return hash ? Hash(tag) : tag;
+        }
+
+        private string Hash(string text)
+        {
+            var hash = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(text));
 
             StringBuilder builder = new StringBuilder();
             foreach (byte b in hash)
                 builder.Append(b.ToString("x2").ToLower());
 
             return builder.ToString();
-        }
-
-        public DateTime GenerateLastModified(DateTime date)
-        {
-            return VertretungsplanTime.ConvertVPTimeToUTC(cache.Find(date).LastUpdated);
         }
     }
 }

@@ -28,11 +28,11 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
         [Route("/")]
         public IActionResult Students()
         {
-            var result = cachingHelper.UseETag(helper.GenerateETag());
+            var result = cachingHelper.UseETag(helper.GenerateETagAll());
             if (result == null)
             {
-                var nearestDate = cache.FindNearest(VertretungsplanTime.Now);
-                result = View(helper.GenerateViewModel(VertretungsplanType.STUDENTS, nearestDate));
+                var nearest = cache.FindNearest(VertretungsplanTime.Now);
+                result = View(helper.GenerateViewModel(VertretungsplanType.STUDENTS, nearest));
             }
 
             return result;
@@ -43,8 +43,9 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
         {
             if (cache.Contains(date))
             {
-                var lastModified = helper.GenerateLastModified(date);
-                return cachingHelper.UseLastModified(lastModified) ?? PartialView("Students", helper.GenerateViewModel(VertretungsplanType.STUDENTS, date));
+                var vertretungsplan = cache.Find(date);
+                var tag = helper.GenerateETagSingle(vertretungsplan, true);
+                return cachingHelper.UseETag(tag) ?? PartialView("Students", helper.GenerateViewModel(VertretungsplanType.STUDENTS, vertretungsplan));
             }
             else
             {
@@ -55,11 +56,11 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
         [Route("/lehrer")]
         public IActionResult Teachers()
         {
-            var result = cachingHelper.UseETag(helper.GenerateETag());
+            var result = cachingHelper.UseETag(helper.GenerateETagAll());
             if (result == null)
             {
-                var nearestDate = cache.FindNearest(VertretungsplanTime.Now);
-                result = View(helper.GenerateViewModel(VertretungsplanType.TEACHERS, nearestDate));
+                var nearest = cache.FindNearest(VertretungsplanTime.Now);
+                result = View(helper.GenerateViewModel(VertretungsplanType.TEACHERS, nearest));
             }
 
             return result;
@@ -70,8 +71,9 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
         {
             if (cache.Contains(date))
             {
-
-                return cachingHelper.UseLastModified(date) ?? PartialView("Teachers", helper.GenerateViewModel(VertretungsplanType.TEACHERS, date));
+                var vertretungsplan = cache.Find(date);
+                var tag = helper.GenerateETagSingle(vertretungsplan, true);
+                return cachingHelper.UseETag(tag) ?? PartialView("Teachers", helper.GenerateViewModel(VertretungsplanType.TEACHERS, vertretungsplan));
             }
             else
             {
