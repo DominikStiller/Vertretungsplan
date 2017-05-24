@@ -2,8 +2,6 @@
 var ajaxBase = "/ajax/" + type;
 var cache = {};
 
-console.log("Source code: https://github.com/DominikStiller/Vertretungsplan");
-
 // Warm up cache
 dates.forEach(function(date) {
    $.get(ajaxBase + "/" + date, function(data) {
@@ -28,6 +26,9 @@ function displayDate(date) {
    // To show new dates the user can refresh the page
    $("main").html(cache[date]);
 }
+
+
+console.log("Source code: https://github.com/DominikStiller/Vertretungsplan");
 
 if (document.cookie.indexOf("ga_optout=true") > -1) {
    window["ga-disable-UA-99091816-1"] = true;
