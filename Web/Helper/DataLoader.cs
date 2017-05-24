@@ -1,12 +1,14 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Linq;
+
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+
+using Newtonsoft.Json;
 
 using DominikStiller.VertretungsplanServer.Models;
 

@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
+﻿using System;
 using System.Linq;
+
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 using DominikStiller.VertretungsplanServer.Models;
 using DominikStiller.VertretungsplanServer.Web.Controllers;

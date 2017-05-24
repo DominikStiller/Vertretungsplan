@@ -1,11 +1,14 @@
-﻿using Amazon.S3;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+
+using Amazon.S3;
+
+using Newtonsoft.Json;
 
 using DominikStiller.VertretungsplanServer.Models;
 

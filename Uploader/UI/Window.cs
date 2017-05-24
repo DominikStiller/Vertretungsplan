@@ -1,12 +1,12 @@
-﻿using Amazon.Runtime;
-using Amazon.S3;
-using Amazon.S3.Model;
-using System;
+﻿using System;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
 
+using Amazon.Runtime;
+using Amazon.S3;
+using Amazon.S3.Model;
 
 namespace DominikStiller.VertretungsplanUploader.UI
 {

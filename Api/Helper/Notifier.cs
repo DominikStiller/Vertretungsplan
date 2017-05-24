@@ -1,9 +1,11 @@
-﻿using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+
+using Microsoft.Extensions.Options;
+
+using Newtonsoft.Json;
 
 namespace DominikStiller.VertretungsplanServer.Api.Helper
 {

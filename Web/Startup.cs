@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System.Globalization;
+
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System.Globalization;
 
 using DominikStiller.VertretungsplanServer.Models;
 using DominikStiller.VertretungsplanServer.Web.Helper;

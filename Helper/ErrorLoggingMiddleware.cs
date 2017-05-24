@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using System.Threading.Tasks;
+
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Threading.Tasks;
 
 namespace DominikStiller.VertretungsplanServer.Helper
 {

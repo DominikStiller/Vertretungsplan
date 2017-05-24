@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 using DominikStiller.VertretungsplanServer.Models;
