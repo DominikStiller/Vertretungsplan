@@ -48,6 +48,8 @@ For development, I use Visual Studio 2017 with the following extensions:
 * [BundlerMinifier](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BundlerMinifier) for minifying CSS and JavaScript files as soon as they have been changed
 * [AWS Toolkit](http://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/getting-set-up.html) for easy deployment to Amazon EC2 using AWS Elastic Beanstalk
 
+My SCSS and JavaScript editor is Atom with the [sass-autocompile](https://atom.io/packages/sass-autocompile) package.
+
 
 ## External libraries
 The following libraries created by other entities are used by this software:
