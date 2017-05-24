@@ -1,4 +1,4 @@
-// var dates, type are declared in the html
+// var type, currentDate, dates are declared in the html
 var ajaxBase = "/ajax/" + type;
 var cache = {};
 
