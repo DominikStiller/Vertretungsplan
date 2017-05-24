@@ -64,7 +64,7 @@ header {
          // Needed for Firefox so it does not cut off text due to smaller font size
          padding-bottom: .5em;
 
-         &[selected=selected] {
+         &[selected] {
             // Hide currently selected date
             display: none;
          }

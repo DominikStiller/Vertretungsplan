@@ -1,46 +1,82 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 using DominikStiller.VertretungsplanServer.Models;
-
-using static DominikStiller.VertretungsplanServer.Web.Helper.VertretungsplanHelper;
+using DominikStiller.VertretungsplanServer.Helper;
+using DominikStiller.VertretungsplanServer.Web.Helper;
 
 namespace DominikStiller.VertretungsplanServer.Web.Controllers
 {
+    [NoCacheHeader()]
     public class VertretungsplanController : Controller
     {
         readonly VertretungsplanRepository cache;
+        readonly VertretungsplanHelper helper;
+        readonly ResponseCachingHelper cachingHelper;
 
-        public VertretungsplanController(VertretungsplanRepository cache)
+        public VertretungsplanController(VertretungsplanRepository cache, VertretungsplanHelper helper, ResponseCachingHelper cachingHelper)
         {
             this.cache = cache;
+            this.helper = helper;
+            this.cachingHelper = cachingHelper;
         }
 
         [Route("/")]
         public IActionResult Students()
         {
-            return View(GenerateViewModel(cache, VertretungsplanType.STUDENTS));
+            var result = cachingHelper.UseETag(helper.GenerateETag());
+            if (result == null)
+            {
+                var nearestDate = cache.FindNearest(VertretungsplanTime.Now);
+                result = View(helper.GenerateViewModel(VertretungsplanType.STUDENTS, nearestDate));
+            }
+
+            return result;
         }
 
         [Route("/ajax/students/{date}")]
         public IActionResult StudentsAjax(DateTime date)
         {
-            return PartialView("Students", GenerateViewModel(cache, VertretungsplanType.STUDENTS, date));
+            if (cache.Contains(date))
+            {
+                var lastModified = helper.GenerateLastModified(date);
+                return cachingHelper.UseLastModified(lastModified) ?? PartialView("Students", helper.GenerateViewModel(VertretungsplanType.STUDENTS, date));
+            }
+            else
+            {
+                return new StatusCodeResult(StatusCodes.Status404NotFound);
+            }
         }
 
         [Route("/lehrer")]
         public IActionResult Teachers()
         {
-            return View(GenerateViewModel(cache, VertretungsplanType.TEACHERS));
+            var result = cachingHelper.UseETag(helper.GenerateETag());
+            if (result == null)
+            {
+                var nearestDate = cache.FindNearest(VertretungsplanTime.Now);
+                result = View(helper.GenerateViewModel(VertretungsplanType.TEACHERS, nearestDate));
+            }
+
+            return result;
         }
 
         [Route("/ajax/teachers/{date}")]
         public IActionResult TeachersAjax(DateTime date)
         {
-            return PartialView("Teachers", GenerateViewModel(cache, VertretungsplanType.TEACHERS, date));
+            if (cache.Contains(date))
+            {
+
+                return cachingHelper.UseLastModified(date) ?? PartialView("Teachers", helper.GenerateViewModel(VertretungsplanType.TEACHERS, date));
+            }
+            else
+            {
+                return new StatusCodeResult(StatusCodes.Status404NotFound);
+            }
         }
     }
 

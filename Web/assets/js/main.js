@@ -2,15 +2,17 @@
 var ajaxBase = "/ajax/" + type;
 var cache = {};
 
-$(function() {
-   console.log("Source code: https://github.com/DominikStiller/Vertretungsplan");
+console.log("Source code: https://github.com/DominikStiller/Vertretungsplan");
 
-   // Warm up cache
-   dates.forEach(function(date) {
-      $.get(ajaxBase + "/" + date, function(data) {
-         cache[date] = data;
-      });
+// Warm up cache
+dates.forEach(function(date) {
+   $.get(ajaxBase + "/" + date, function(data) {
+      cache[date] = data;
    });
+});
+
+$(function() {
+   cache[currentDate] = $("main").html();
 
    $("body").on("click", "#previousdate, #nextdate", function() {
       displayDate($(this).data("date"));

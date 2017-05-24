@@ -41,10 +41,11 @@ namespace DominikStiller.VertretungsplanServer.Models
             return vertretungsplans.FirstOrDefault(v => v.Date == date.Date);
         }
 
-        public Vertretungsplan FindNearest(DateTime date)
+        public DateTime? FindNearest(DateTime date)
         {
-            // Return today, nearest future date or nearest past date in this order
-           return vertretungsplans.FirstOrDefault(v => v.Date >= date.Date) ?? vertretungsplans.LastOrDefault(v => v.Date < date.Date);
+            // Return today, nearest future date, nearest past date or null in this order
+            var nearest = vertretungsplans.FirstOrDefault(v => v.Date >= date.Date) ?? vertretungsplans.LastOrDefault(v => v.Date < date.Date);
+            return nearest != null ? nearest.Date : (DateTime?)null;
         }
 
         public Vertretungsplan GetPrevious(Vertretungsplan vertretungsplan)

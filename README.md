@@ -60,6 +60,7 @@ The following libraries created by other entities are used by this software:
 * [Jackson](https://github.com/FasterXML/jackson)
 * [Json.NET](http://www.newtonsoft.com/json)
 * [UCanAccess](http://ucanaccess.sourceforge.net)
+* [Web Markup Minifier](https://github.com/Taritsyn/WebMarkupMin)
 
 
 ## License

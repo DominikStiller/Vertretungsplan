@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Security.Cryptography;
+using System.Text;
 using System.Linq;
 
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -9,15 +11,23 @@ using DominikStiller.VertretungsplanServer.Helper;
 
 namespace DominikStiller.VertretungsplanServer.Web.Helper
 {
-    class VertretungsplanHelper
+    public class VertretungsplanHelper
     {
         const string DATEFORMAT_INTERNAL = "yyyy-MM-dd";
         const string DATEFORMAT_PUBLIC = "dddd, dd.MM.";
 
-        public static VertretungsplanViewModel GenerateViewModel(VertretungsplanRepository cache, VertretungsplanType type, DateTime? date = null)
+        readonly VertretungsplanRepository cache;
+
+        public VertretungsplanHelper(VertretungsplanRepository cache)
+        {
+            this.cache = cache;
+        }
+
+        public VertretungsplanViewModel GenerateViewModel(VertretungsplanType type, DateTime? date)
         {
             var model = new VertretungsplanViewModel();
-            var vertretungsplan = cache.FindNearest(date ?? VertretungsplanTime.Now);
+
+            var vertretungsplan = cache.Find(date.GetValueOrDefault());
 
             model.Vertretungsplan = vertretungsplan;
 
@@ -50,7 +60,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
 
                 model.LastUpdatedInWords = TimespanInWords(VertretungsplanTime.Now - model.Vertretungsplan.LastUpdated);
 
-                model.Dates = cache.GetAllDates().Select(d => d.ToString(DATEFORMAT_INTERNAL)).ToList();
+                model.Dates = cache.GetAllDates().Where(vp => vp.Date != vertretungsplan.Date).Select(d => d.ToString(DATEFORMAT_INTERNAL)).ToList();
                 model.PreviousDate = cache.GetPrevious(vertretungsplan).Date;
                 model.NextDate = cache.GetNext(vertretungsplan).Date;
                 model.DateSelectorItems = cache.GetAllDates().Select(dateOption =>
@@ -70,7 +80,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
             return model;
         }
 
-        static string TimespanInWords(TimeSpan timespan)
+        string TimespanInWords(TimeSpan timespan)
         {
             if (timespan.TotalDays >= 1)
             {
@@ -86,9 +96,30 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
             }
         }
 
-        static string FormatTimespan(double quantity, string singular, string plural)
+        string FormatTimespan(double quantity, string singular, string plural)
         {
             return String.Format("{0} {1}", Math.Floor(quantity), quantity < 2 ? singular : plural);
+        }
+
+        // Use md5-hashed date, last updated and version of all dates as ETag content
+        public string GenerateETag()
+        {
+            var tag = cache.GetAll().Aggregate("", (text, vp) =>
+            {
+                return text + vp.Date.ToString(DATEFORMAT_INTERNAL) + vp.LastUpdated.ToString() + vp.Version;
+            });
+            var hash = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(tag));
+
+            StringBuilder builder = new StringBuilder();
+            foreach (byte b in hash)
+                builder.Append(b.ToString("x2").ToLower());
+
+            return builder.ToString();
+        }
+
+        public DateTime GenerateLastModified(DateTime date)
+        {
+            return VertretungsplanTime.ConvertVPTimeToUTC(cache.Find(date).LastUpdated);
         }
     }
 }

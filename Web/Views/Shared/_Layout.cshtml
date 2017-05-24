@@ -9,7 +9,7 @@
     <meta name="theme-color" content="#eee">
     <link rel="icon" type="image/png" href="/images/icon.png">
     <link rel="apple-touch-icon" href="/images/icon.png">
-    <link rel="stylesheet" href="/main.min.css">
+    <link rel="stylesheet" href="/main.min.css" asp-append-version="true">
     @RenderSection("LightweightScripts", false)
     <script src="https://use.typekit.net/hii3spj.js"></script>
     <script>try { Typekit.load({ async: true }); } catch (e) { }</script>
@@ -17,7 +17,7 @@
     {
         @RenderSection("Scripts", false)
         <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-        <script src="/main.min.js"></script>
+        <script src="/main.min.js" asp-append-version="true"></script>
         <environment names="Production">
             <script>
                 (function (i, s, o, g, r, a, m) {

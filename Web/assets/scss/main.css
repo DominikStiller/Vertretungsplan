@@ -68,7 +68,7 @@ header {
   padding-bottom: .5em;
 }
 
-#dateselector-container #dateselector option[selected=selected] {
+#dateselector-container #dateselector option[selected] {
   display: none;
 }
 
