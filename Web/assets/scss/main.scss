@@ -7,14 +7,14 @@
 
 @import "sizes/xsmall";
 @media(min-width: 500px) {
-    @import"sizes/small";
+   @import"sizes/small";
 }
 @media(min-width: 800px) {
-    @import"sizes/medium";
+   @import"sizes/medium";
 }
-@media(min-width: 1100px) {
-    @import"sizes/large";
+@media(min-width: 1250px) {
+   @import"sizes/large";
 }
 @media(min-width: 1800px) {
-    @import"sizes/xlarge";
+   @import"sizes/xlarge";
 }

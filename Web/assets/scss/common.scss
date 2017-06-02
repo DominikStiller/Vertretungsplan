@@ -14,7 +14,6 @@ html {
 body {
    margin: 0;
    font-family: $font-main;
-   font-size: 14px;
    line-height: 1.43;
    color: $font-color;
    background-color: $body-color;
@@ -22,7 +21,7 @@ body {
 
 footer,
 main {
-   max-width: 1100px;
+   max-width: 1250px;
    margin: 0 auto;
 }
 

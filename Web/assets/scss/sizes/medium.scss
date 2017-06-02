@@ -1,6 +1,10 @@
 // main: ../main.scss
 // min-width: 800px
 
+body {
+   font-size: 15px;
+}
+
 footer,
 main {
    padding: 0 2em;
@@ -52,7 +56,6 @@ header {
 #data {
    th {
       padding: 8px .8rem;
-      font-size: 1.2em;
    }
 
    td {
