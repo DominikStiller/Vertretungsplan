@@ -8,11 +8,8 @@
   {
     "outputFileName": "wwwroot/main.min.js",
     "inputFiles": [
+      "assets/js/zepto.js",
       "assets/js/main.js"
-    ],
-    "minify": {
-      "enabled": true,
-      "renameLocals": true
-    }
+    ]
   }
 ]

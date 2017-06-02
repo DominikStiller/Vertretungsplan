@@ -63,6 +63,7 @@ The following libraries created by other entities are used by this software:
 * [Json.NET](http://www.newtonsoft.com/json)
 * [UCanAccess](http://ucanaccess.sourceforge.net)
 * [Web Markup Minifier](https://github.com/Taritsyn/WebMarkupMin)
+* [Zepto.js](https://github.com/madrobby/zepto)
 
 
 ## License
