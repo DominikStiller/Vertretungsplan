@@ -77,10 +77,6 @@ header {
   padding: 1rem;
 }
 
-#metadata {
-  text-align: justify;
-}
-
 #metadata dt {
   font-weight: bold;
 }
@@ -197,10 +193,6 @@ a {
   margin-top: 0;
 }
 
-.running-text p {
-  text-align: justify;
-}
-
 .running-text a {
   color: #333;
   text-decoration: none;
@@ -253,6 +245,10 @@ header {
 
 #dateselector-container #previousdate {
   margin-left: -1rem;
+}
+
+#metadata {
+  text-align: justify;
 }
 
 #data {
@@ -327,6 +323,7 @@ footer {
   }
   #metadata {
     max-width: calc(100% - (250px + 2em));
+    text-align: left;
   }
   #data th {
     padding: 8px .8rem;

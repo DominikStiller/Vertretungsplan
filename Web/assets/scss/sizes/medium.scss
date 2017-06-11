@@ -51,6 +51,7 @@ header {
    // Metadata text should never be overlapping #guslogo
    // Total width - (#guslogo width + #guslogo right)
    max-width: calc(100% - (250px + 2em));
+   text-align: left;
 }
 
 #data {
