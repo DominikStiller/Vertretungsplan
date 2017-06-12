@@ -10,10 +10,8 @@ main {
    margin-bottom: 1.5em;
 }
 
-#guslogo {
-   width: 240px;
-   top: -3em;
-   right: 0;
+header {
+   min-height: 186px;
 }
 
 #dateselector-container {
@@ -27,17 +25,23 @@ main {
    }
 }
 
+#guslogo {
+   width: 240px;
+   top: -3em;
+   right: 0;
+}
+
 #metadata {
    max-width: 830px;
 }
 
 #data {
    th {
-      padding: 8px 1rem;
+      padding: 8px .9rem;
    }
 
    td {
-      padding: 6px 1rem;
+      padding: 6px .9rem;
    }
 }
 

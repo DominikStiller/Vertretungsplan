@@ -297,7 +297,7 @@ footer {
   }
   header {
     margin-bottom: 1.5em;
-    min-height: 245px;
+    min-height: 216px;
   }
   #dateselector-container {
     margin-bottom: 2em;
@@ -368,10 +368,8 @@ footer {
     margin-top: 6em;
     margin-bottom: 1.5em;
   }
-  #guslogo {
-    width: 240px;
-    top: -3em;
-    right: 0;
+  header {
+    min-height: 186px;
   }
   #dateselector-container #dateselector {
     font-size: 5em;
@@ -380,14 +378,19 @@ footer {
   #dateselector-container #previousdate {
     font-size: 7.4em;
   }
+  #guslogo {
+    width: 240px;
+    top: -3em;
+    right: 0;
+  }
   #metadata {
     max-width: 830px;
   }
   #data th {
-    padding: 8px 1rem;
+    padding: 8px .9rem;
   }
   #data td {
-    padding: 6px 1rem;
+    padding: 6px .9rem;
   }
   footer {
     margin-bottom: 4em;
@@ -406,7 +409,7 @@ footer {
     margin-top: 8em;
   }
   header {
-    min-height: 215px;
+    min-height: 0;
   }
   #guslogo {
     top: -5em;
