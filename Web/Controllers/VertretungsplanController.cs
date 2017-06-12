@@ -32,7 +32,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
             if (result == null)
             {
                 var nearest = cache.FindNearest(VertretungsplanTime.Now);
-                result = View(helper.GenerateViewModel(VertretungsplanType.STUDENTS, nearest));
+                result = View(helper.GenerateViewModel(VertretungsplanType.Students, nearest));
             }
 
             return result;
@@ -45,7 +45,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
             {
                 var vertretungsplan = cache.Find(date);
                 var tag = helper.GenerateETagSingle(vertretungsplan, true);
-                return cachingHelper.UseETag(tag) ?? PartialView("Students", helper.GenerateViewModel(VertretungsplanType.STUDENTS, vertretungsplan));
+                return cachingHelper.UseETag(tag) ?? PartialView("Students", helper.GenerateViewModel(VertretungsplanType.Students, vertretungsplan));
             }
             else
             {
@@ -60,7 +60,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
             if (result == null)
             {
                 var nearest = cache.FindNearest(VertretungsplanTime.Now);
-                result = View(helper.GenerateViewModel(VertretungsplanType.TEACHERS, nearest));
+                result = View(helper.GenerateViewModel(VertretungsplanType.Teachers, nearest));
             }
 
             return result;
@@ -73,7 +73,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
             {
                 var vertretungsplan = cache.Find(date);
                 var tag = helper.GenerateETagSingle(vertretungsplan, true);
-                return cachingHelper.UseETag(tag) ?? PartialView("Teachers", helper.GenerateViewModel(VertretungsplanType.TEACHERS, vertretungsplan));
+                return cachingHelper.UseETag(tag) ?? PartialView("Teachers", helper.GenerateViewModel(VertretungsplanType.Teachers, vertretungsplan));
             }
             else
             {

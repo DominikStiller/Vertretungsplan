@@ -31,7 +31,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
 
             if (vertretungsplan != null)
             {
-                if (type == VertretungsplanType.TEACHERS)
+                if (type == VertretungsplanType.Teachers)
                 {
                     model.Entries = vertretungsplan.Entries
                         // Only show substitutions that are assigned to a teacher
