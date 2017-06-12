@@ -51,32 +51,35 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
         {
             var response = await client.GetAsync("/dates?metadata");
 
-            if (response.IsSuccessStatusCode)
+            if (!response.IsSuccessStatusCode)
+                return;
+
+            var json = await response.Content.ReadAsStringAsync();
+
+            var dates = JsonConvert.DeserializeObject<List<VertretungsplanMetadata>>(json);
+            if (dates == null)
+                return;
+
+            foreach (var loaded in dates)
             {
-                var json = await response.Content.ReadAsStringAsync();
+                var cached = cache.Find(loaded.Date);
+                var dateExists = cached != null;
 
-                var dates = JsonConvert.DeserializeObject<List<VertretungsplanMetadata>>(json);
-                foreach (var loaded in dates)
+                // New or more recent than existing version
+                if (!dateExists || loaded.LastUpdated > cached.LastUpdated || loaded.Version > cached.Version)
                 {
-                    var cached = cache.Find(loaded.Date);
-                    var dateExists = cached != null;
+                    var dateResponse = await client.GetAsync("/dates/" + loaded.Date.ToString("yyyy-MM-dd"));
+                    var dateJson = await dateResponse.Content.ReadAsStringAsync();
 
-                    // New or more recent than existing version
-                    if (!dateExists || loaded.LastUpdated > cached.LastUpdated || loaded.Version > cached.Version)
-                    {
-                        var dateResponse = await client.GetAsync("/dates/" + loaded.Date.ToString("yyyy-MM-dd"));
-                        var dateJson = await dateResponse.Content.ReadAsStringAsync();
-
-                        var vp = JsonConvert.DeserializeObject<Vertretungsplan>(dateJson);
-                        cache.Add(vp);
-                    }
+                    var vp = JsonConvert.DeserializeObject<Vertretungsplan>(dateJson);
+                    cache.Add(vp);
                 }
+            }
 
-                var oldDates = cache.GetAllDates().Except(dates.Select(vp => vp.Date)).ToList();
-                foreach (var old in oldDates)
-                {
-                    cache.Remove(old);
-                }
+            var oldDates = cache.GetAllDates().Except(dates.Select(vp => vp.Date)).ToList();
+            foreach (var old in oldDates)
+            {
+                cache.Remove(old);
             }
         }
     }
