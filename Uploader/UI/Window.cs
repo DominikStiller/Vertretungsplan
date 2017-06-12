@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Configuration;
 using System.IO;
 using System.Windows.Forms;
+using System.Threading;
 
 using Amazon.Runtime;
 using Amazon.S3;
@@ -35,6 +36,7 @@ namespace DominikStiller.VertretungsplanUploader.UI
             watcher.NotifyFilter = NotifyFilters.LastWrite;
             watcher.Changed += (source, e) =>
             {
+                Thread.Sleep(3000);
                 // Do not show messages if the upload was triggered automatically
                 UploadToS3Silent();
             };
