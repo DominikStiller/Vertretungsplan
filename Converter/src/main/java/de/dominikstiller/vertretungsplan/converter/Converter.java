@@ -81,7 +81,7 @@ public class Converter {
       // Upload converted file to S3
       s3.putObject(config.getProperty("Output.S3Bucket"), config.getProperty("Output.S3Key"), jsonMapper.writeValueAsString(vps));
 
-      Notifier.notifyApi(config.getProperty("Api.Host"), config.getProperty("Api.AuthInfo"));
+      Notifier.notifyApi(config.getProperty("Api.Protocol"), config.getProperty("Api.Host"), config.getProperty("Api.AuthInfo"));
    }
 
    // Download database from S3

@@ -34,6 +34,12 @@
     <None Include="..\Scripts\ConfigureIISAppPool.ps1" Link="Scripts\ConfigureIISAppPool.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="..\Scripts\InstallSSLCert.ps1" Link="Scripts\InstallSSLCert.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="..\private\Scripts\LoadWebCertFromS3.ps1" Link="Scripts\LoadWebCertFromS3.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include=".ebextensions\iis.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
