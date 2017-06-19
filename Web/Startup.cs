@@ -47,13 +47,9 @@ namespace DominikStiller.VertretungsplanServer.Web
             });
 
             services.AddWebMarkupMin()
-                .AddHtmlMinification()
                 .AddHttpCompression(options =>
                 {
-                    options.CompressorFactories = new List<ICompressorFactory>
-                    {
-                        new GZipCompressorFactory(new GZipCompressionSettings { Level = CompressionLevel.Fastest })
-                    };
+                    options.CompressorFactories = new List<ICompressorFactory> { new GZipCompressorFactory() };
                 });
 
             services.AddMvc();
