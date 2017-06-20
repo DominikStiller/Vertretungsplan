@@ -98,6 +98,10 @@ header {
   background-color: #ccc;
 }
 
+#data thead tr th:not(:last-child) {
+  border-right: 2px solid #ccc;
+}
+
 #data tbody tr:nth-child(odd) {
   background-color: #e0e0e0;
 }

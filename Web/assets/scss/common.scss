@@ -100,6 +100,10 @@ header {
    // Colors
    thead tr {
       background-color: #ccc;
+
+      th:not(:last-child) {
+         border-right: 2px solid #ccc;
+      }
    }
 
    tbody tr {
