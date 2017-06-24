@@ -36,6 +36,11 @@ namespace DominikStiller.VertretungsplanUploader.UI
             watcher.NotifyFilter = NotifyFilters.LastWrite;
             watcher.Changed += (source, e) =>
             {
+                Invoke(new Action(() =>
+                {
+                    UpdateLastChanged();
+                }));
+
                 Thread.Sleep(3000);
                 // Do not show messages if the upload was triggered automatically
                 UploadToS3Silent();
@@ -89,6 +94,8 @@ namespace DominikStiller.VertretungsplanUploader.UI
 
         private void uploadButton_Click(object sender, EventArgs e)
         {
+            UpdateLastChanged();
+
             try
             {
                 UploadToS3();
@@ -104,13 +111,19 @@ namespace DominikStiller.VertretungsplanUploader.UI
         {
             // Update GUI
             pathTextBox.Text = database;
-            lastChangeLabel.Text = new FileInfo(database).LastWriteTime.ToString();
             statusLabel.Text = UIStrings.Status_Watching;
+            UpdateLastChanged();
             uploadButton.Enabled = true;
 
             watcher.Path = Path.GetDirectoryName(database);
             watcher.Filter = Path.GetFileName(database);
             watcher.EnableRaisingEvents = true;
+        }
+
+        private void UpdateLastChanged()
+        {
+            lastChangeLabel.Text = new FileInfo(database).LastWriteTime.ToString();
+            lastChangeLabel.Update();
         }
 
         private void UploadToS3Silent()

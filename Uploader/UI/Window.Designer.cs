@@ -83,8 +83,9 @@
             this.lastChangeLabel.AutoSize = true;
             this.lastChangeLabel.Location = new System.Drawing.Point(102, 48);
             this.lastChangeLabel.Name = "lastChangeLabel";
-            this.lastChangeLabel.Size = new System.Drawing.Size(0, 13);
+            this.lastChangeLabel.Size = new System.Drawing.Size(13, 13);
             this.lastChangeLabel.TabIndex = 3;
+            this.lastChangeLabel.Text = "—";
             // 
             // uploadButton
             // 
