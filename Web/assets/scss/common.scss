@@ -139,6 +139,11 @@ header {
          border-bottom-right-radius: $border-radius;
       }
    }
+
+   .noentries {
+      font-style: italic;
+      margin: .5em 0;
+   }
 }
 
 .colorstripe td {

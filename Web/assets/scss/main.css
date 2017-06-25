@@ -130,6 +130,11 @@ header {
   border-bottom-right-radius: 8px;
 }
 
+#data .noentries {
+  font-style: italic;
+  margin: .5em 0;
+}
+
 .colorstripe td {
   padding: 0 !important;
   background-color: #438bb1;
@@ -264,6 +269,10 @@ header {
   padding: 5px 8px;
 }
 
+#data .noentries {
+  font-size: 1.2em;
+}
+
 .colorstripe td {
   height: 3px !important;
 }
@@ -344,6 +353,9 @@ footer {
   #data tbody tr:hover:not(.divider) td:not(:last-child) {
     border-color: #bbb;
     transition: border-color .3s .2s;
+  }
+  #data .noentries {
+    font-size: 1.5em;
   }
   .colorstripe td {
     height: 4px !important;
