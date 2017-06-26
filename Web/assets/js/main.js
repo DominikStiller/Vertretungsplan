@@ -21,10 +21,8 @@ $(function() {
 });
 
 function displayDate(date) {
-   // Cache misses are very unlikely to occur, since all html is loaded at the same time
-   // This means there should be no references to dates that are not cached
-   // To show new dates the user can refresh the page
-   $("main").html(cache[date]);
+   if (date in cache)
+      $("main").html(cache[date]);
 }
 
 
