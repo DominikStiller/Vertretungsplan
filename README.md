@@ -20,7 +20,7 @@ Converter then notifies Api that a new version is available.
 ### Api
 Api is an API server intended to run on Amazon EC2 using AWS Elastic Beanstalk.
 The `Update data` operation loads the JSON file from S3 and sends a notification to Firebase Cloud Messaging.
-The data is then accessible to Web and other clients (such as a mobile applications).
+The data is then accessible to Web and other clients (such as a mobile applications like [Tim Süberkrüb](https://github.com/tim-sueberkrueb)'s [OurGUS](https://github.com/tim-sueberkrueb/ourgus) app).
 
 Refer to the [API documentation](Api/API_Documentation.md) for more details.
 
