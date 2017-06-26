@@ -17,6 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{13FC
 	ProjectSection(SolutionItems) = preProject
 		Scripts\ConfigureIISAppPool.ps1 = Scripts\ConfigureIISAppPool.ps1
 		Scripts\InstallSSLCert.ps1 = Scripts\InstallSSLCert.ps1
+		Scripts\EnableHTTPtoHTTPSRedirection.ps1 = Scripts\EnableHTTPtoHTTPSRedirection.ps1
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "private", "private", "{749BECA2-8B84-49C8-A755-BE1A9286AA28}"
