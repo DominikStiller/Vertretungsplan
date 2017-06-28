@@ -111,7 +111,11 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
 
         public string GenerateETagSingle(Vertretungsplan vp, bool hash)
         {
-            var tag = vp.Date.ToString(DATEFORMAT_INTERNAL) + vp.LastUpdated.ToString() + TimespanInWords(VertretungsplanTime.Now - vp.LastUpdated) + vp.Version;
+            var tag = vp.Date.ToString(DATEFORMAT_INTERNAL)
+                + vp.LastUpdated.ToString()
+                + TimespanInWords(VertretungsplanTime.Now - vp.LastUpdated)
+                + vp.Version
+                + cache.GetAllDates().Aggregate("", (all, date) => all += date.ToString(DATEFORMAT_INTERNAL));
             return hash ? Hash(tag) : tag;
         }
 
