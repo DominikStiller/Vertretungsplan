@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -81,7 +82,9 @@ public class Converter {
       // Upload converted file to S3
       s3.putObject(config.getProperty("Output.S3Bucket"), config.getProperty("Output.S3Key"), jsonMapper.writeValueAsString(vps));
 
-      Notifier.notifyApi(config.getProperty("Api.Protocol"), config.getProperty("Api.Host"), config.getProperty("Api.AuthInfo"));
+      Notifier.notifyEndpoints(
+              Arrays.stream(config.getProperty("Notification.Endpoints").split(",")).map(url -> url.trim()).collect(Collectors.toList()),
+              Arrays.stream(config.getProperty("Notification.AuthInfos").split(",")).map(url -> url.trim()).collect(Collectors.toList()));
    }
 
    // Download database from S3
