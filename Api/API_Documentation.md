@@ -167,8 +167,8 @@ Update of data from Amazon S3. Authentication required.
 
 * **Request Headers**
 
-   * `Authentication`:
-   [Basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication#Client_side) with username `update` is used for authorization.
+   * `Authorization`:
+   [Basic authentication](https://en.wikipedia.org/wiki/Basic_access_authentication#Client_side) with username `update` is used for authentication.
    The password is set in `appsettings.json`.
    (Sample value: `Basic dXBkYXRlOm15cGFzc3dvcmQ=` uses password `mypassword`)
 
