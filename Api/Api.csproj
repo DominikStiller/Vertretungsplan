@@ -12,6 +12,7 @@
     <PackageReference Include="AWSSDK.S3" Version="3.3.6.1" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Rewrite" Version="1.0.2" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.2" />
   </ItemGroup>
@@ -26,9 +27,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="..\private\Scripts\LoadApiCertFromS3.ps1" Link="Scripts\LoadApiCertFromS3.ps1">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="..\Scripts\EnableHTTPtoHTTPSRedirection.ps1" Link="Scripts\EnableHTTPtoHTTPSRedirection.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include=".ebextensions\iis.config">

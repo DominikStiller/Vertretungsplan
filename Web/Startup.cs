@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using System.Collections.Generic;
-using System.IO.Compression;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Net.Http.Headers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -75,6 +75,10 @@ namespace DominikStiller.VertretungsplanServer.Web
             {
                 loggerFactory.AddAWSProvider(Configuration.GetAWSLoggingConfigSection());
                 app.UseErrorLogging();
+
+                var rewriteOptions = new RewriteOptions()
+                    .AddRedirectToHttpsPermanent();
+                app.UseRewriter(rewriteOptions);
             }
 
             app.UseWebMarkupMin();
