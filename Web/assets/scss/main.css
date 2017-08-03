@@ -252,10 +252,6 @@ header {
   margin-left: -1rem;
 }
 
-#metadata {
-  text-align: justify;
-}
-
 #data {
   overflow-x: auto;
 }
@@ -332,7 +328,6 @@ footer {
   }
   #metadata {
     max-width: calc(100% - (250px + 2em));
-    text-align: left;
   }
   #data th {
     padding: 8px .8rem;
