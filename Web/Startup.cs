@@ -11,7 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-using WebMarkupMin.AspNetCore1;
+using WebMarkupMin.AspNetCore2;
 using WebMarkupMin.AspNet.Common.Compressors;
 
 using DominikStiller.VertretungsplanServer.Models;
