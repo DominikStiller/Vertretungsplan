@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 
 namespace DominikStiller.VertretungsplanServer.Api
 {
@@ -6,9 +7,7 @@ namespace DominikStiller.VertretungsplanServer.Api
     {
         public static void Main(string[] args)
         {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseIISIntegration()
+            var host = WebHost.CreateDefaultBuilder()
                 .UseStartup<Startup>()
                 .Build();
 
