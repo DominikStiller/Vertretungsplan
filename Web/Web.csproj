@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
     <RootNamespace>DominikStiller.VertretungsplanServer.Web</RootNamespace>
     <AssemblyName>DominikStiller.VertretungsplanServer.web</AssemblyName>
     <UserSecretsId>0a6513b9-a9f7-4b1b-b931-0c842665eda8</UserSecretsId>
