@@ -36,7 +36,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
 
         [HttpPost]
         [Route("/")]
-        public async Task<IActionResult> Login(string username, string password)
+        public async Task<IActionResult> Login(string username, string password, bool rememberme)
         {
             var user = users.Authenticate(username, password);
 
@@ -50,7 +50,10 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
 
                 var userPrincipal = new ClaimsPrincipal(new ClaimsIdentity(claims, "Password"));
 
-                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, userPrincipal);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, userPrincipal, new AuthenticationProperties()
+                {
+                    IsPersistent = rememberme
+                });
 
                 // Redirects to Vertretungsplan page
                 return Redirect("/");

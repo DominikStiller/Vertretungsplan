@@ -258,21 +258,50 @@ a {
 
 #loginform label {
   display: inline-block;
+}
+
+#loginform #username-label, #loginform #password-label {
   width: 90px;
 }
 
+#loginform #rememberme-label {
+  margin-left: 3px;
+}
+
 #loginform input {
-  display: inline-block;
-  padding: 0.5em;
-  margin-bottom: 1em;
-  border: 1px solid #cacaca;
   font-size: 1rem;
+  border: 1px solid #cacaca;
+  background-color: white;
   transition: border .2s;
+}
+
+#loginform input:hover {
+  border: 1px solid #aaa;
 }
 
 #loginform input:focus {
   outline: none;
+}
+
+#loginform input[type=text], #loginform input[type=password] {
+  margin-bottom: 1em;
+  display: inline-block;
+  padding: 0.5em;
+}
+
+#loginform input[type=text]:focus, #loginform input[type=password]:focus {
   border: 1px solid #aaa;
+}
+
+#loginform input[type=checkbox] {
+  width: 1.2em;
+  height: 1.2em;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+#loginform input[type=checkbox]:checked {
+  background-color: #438bb1;
 }
 
 #loginform button {
@@ -286,14 +315,19 @@ a {
   transition: background-color .2s;
 }
 
-@media (min-width: 331px) {
-  #loginform button {
-    margin-left: 90px;
-  }
+#loginform button:hover, #loginform button:active {
+  background-color: #3c7c9f;
 }
 
-#loginform button:hover {
-  background-color: #3c7c9f;
+#loginform .form-row {
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 331px) {
+  #loginform .margin-left {
+    margin-left: 90px;
+  }
 }
 
 body {

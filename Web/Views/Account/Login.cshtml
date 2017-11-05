@@ -17,10 +17,14 @@
         {
             <p id="login-error">Ungültige Anmeldedaten. Bitte überprüfen sie den Benutzernamen und das Passwort.</p>
         }
-        <label asp-for="Username">Benutzer:</label><input asp-for="Username" required />
+        <label asp-for="Username" id="username-label">Benutzer:</label><input asp-for="Username" required />
         <br />
-        <label asp-for="Password">Passwort:</label><input asp-for="Password" required />
+        <label asp-for="Password" id="password-label">Passwort:</label><input asp-for="Password" required />
         <br />
-        <button type="submit">Anmelden</button>
+        <span class="form-row">
+            <input asp-for="RememberMe" id="rememberme" class="margin-left" /><label asp-for="RememberMe" id="rememberme-label">Angemeldet bleiben</label>
+        </span>
+        <br />
+        <button type="submit" class="margin-left">Anmelden</button>
     </form>
 </div>

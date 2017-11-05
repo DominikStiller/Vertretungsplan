@@ -270,20 +270,48 @@ a {
 
    label {
       display: inline-block;
+   }
+
+   #username-label, #password-label {
       width: 90px;
    }
 
+   #rememberme-label {
+      margin-left: 3px;
+   }
+
    input {
-      display: inline-block;
-      padding: 0.5em;
-      margin-bottom: 1em;
-      border: 1px solid #cacaca;
       font-size: 1rem;
+      border: 1px solid #cacaca;
+      background-color: white;
       transition: border .2s;
+
+      &:hover {
+         border: 1px solid #aaa;
+      }
 
       &:focus {
          outline: none;
+      }
+   }
+
+   input[type=text], input[type=password] {
+      margin-bottom: 1em;
+      display: inline-block;
+      padding: 0.5em;
+
+      &:focus {
          border: 1px solid #aaa;
+      }
+   }
+
+   input[type=checkbox] {
+      width: 1.2em;
+      height: 1.2em;
+      @include no-default-appearance();
+
+      &:checked {
+         background-color: $cyan-blue;
       }
    }
 
@@ -295,13 +323,21 @@ a {
       color: white;
       background-color: $cyan-blue;
       outline: none;
-      @media(min-width: 331px) {
-         margin-left: 90px;
-      }
       transition: background-color .2s;
 
-      &:hover {
+      &:hover, &:active {
          background-color: darken($cyan-blue, 5);
+      }
+   }
+
+   .form-row {
+      display: flex;
+      align-items: center;
+   }
+
+   .margin-left {
+      @media(min-width: 331px) {
+         margin-left: 90px;
       }
    }
 }
