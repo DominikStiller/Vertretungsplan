@@ -34,6 +34,10 @@
     }
 </head>
 <body>
+    @if (Context.User.Identity.IsAuthenticated)
+    {
+        @Html.Partial("_MenuBar")
+    }
     <main>
         @RenderBody()
     </main>

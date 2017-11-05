@@ -1,6 +1,12 @@
 // main: ../main.scss
 // min-width: 500px
 
+nav {
+   > * {
+      padding: 0 2em;
+   }
+}
+
 #data {
    th {
       padding: 8px;

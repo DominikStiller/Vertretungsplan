@@ -10,6 +10,12 @@ main {
    padding: 0 1em;
 }
 
+nav {
+   > * {
+      padding: 0 1em;
+   }
+}
+
 main {
    margin-top: 1.2em;
    margin-bottom: 1.2em;
@@ -76,4 +82,8 @@ footer {
 
 .message div {
    font-size: 2em;
+}
+
+#loginpage-header  {
+   display: none;
 }

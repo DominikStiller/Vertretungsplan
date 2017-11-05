@@ -16,6 +16,48 @@ body {
   background-color: #f1f1f1;
 }
 
+nav {
+  width: 100%;
+  color: #fff;
+  height: 3em;
+  background-color: #555;
+  display: flex;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+nav > * {
+  line-height: 3em;
+}
+
+nav .active {
+  font-weight: bold;
+}
+
+nav a {
+  text-decoration: none;
+  color: #fff;
+}
+
+nav a:hover {
+  background-color: #777;
+}
+
+nav #logout {
+  margin-left: auto;
+}
+
+nav #logout #logout-icon {
+  height: 16px;
+  color: white;
+  vertical-align: middle;
+  position: relative;
+  top: -1px;
+  margin-right: 3px;
+}
+
 footer,
 main {
   max-width: 1250px;
@@ -206,12 +248,64 @@ a {
   overflow-wrap: break-word;
 }
 
+#loginpage-header {
+  min-height: 0;
+}
+
+#loginform #login-error {
+  color: red;
+}
+
+#loginform label {
+  display: inline-block;
+  width: 90px;
+}
+
+#loginform input {
+  display: inline-block;
+  padding: 0.5em;
+  margin-bottom: 1em;
+  border: 1px solid #cacaca;
+  font-size: 1rem;
+  transition: border .2s;
+}
+
+#loginform input:focus {
+  outline: none;
+  border: 1px solid #aaa;
+}
+
+#loginform button {
+  display: inline-block;
+  padding: .8em 2em;
+  border: none;
+  font-size: .9rem;
+  color: white;
+  background-color: #438bb1;
+  outline: none;
+  transition: background-color .2s;
+}
+
+@media (min-width: 331px) {
+  #loginform button {
+    margin-left: 90px;
+  }
+}
+
+#loginform button:hover {
+  background-color: #3c7c9f;
+}
+
 body {
   font-size: 14px;
 }
 
 footer,
 main {
+  padding: 0 1em;
+}
+
+nav > * {
   padding: 0 1em;
 }
 
@@ -282,7 +376,14 @@ footer {
   font-size: 2em;
 }
 
+#loginpage-header {
+  display: none;
+}
+
 @media (min-width: 500px) {
+  nav > * {
+    padding: 0 2em;
+  }
   #data th {
     padding: 8px;
     font-size: 1em;
@@ -405,6 +506,9 @@ footer {
   }
   .message {
     padding: 0;
+  }
+  #loginpage-header {
+    display: block;
   }
 }
 

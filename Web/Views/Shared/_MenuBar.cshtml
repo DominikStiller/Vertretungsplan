@@ -1,0 +1,19 @@
+﻿@{ 
+    var requestPath = Context.Request.Path.Value;
+}
+<nav>
+    <span id="username">Hallo @Context.User.Identity.Name!</span>
+    @if (Context.User.IsInRole("Teacher"))
+    {
+        <a href="/teachers" @if (requestPath == "/teachers") { <text> class="active" </text> }>Lehrer</a>
+        <a href="/students" @if (requestPath == "/students") { <text> class="active" </text> }>Schüler</a>
+    }
+    else
+    {
+        <a href="/students" @if (requestPath == "/students") { <text> class="active" </text>  }>Vertretungsplan</a>
+    }
+    <a href="/logout" id="logout">
+        <img src="/icons/logout.svg" id="logout-icon" />
+        Abmelden
+    </a>
+</nav>

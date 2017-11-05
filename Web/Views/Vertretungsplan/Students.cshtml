@@ -10,7 +10,7 @@
 {
     @section Scripts {
         <script>
-            var type = "students";
+            var page = "students";
             var currentDate = "@Vertretungsplan.Date.ToString(Model.DateformatInternal)";
             @{ var jsDates = Model.Dates.Select(d => String.Format("\"{0}\"", d)); }
             var dates = [@Html.Raw(String.Join(", ", jsDates))];

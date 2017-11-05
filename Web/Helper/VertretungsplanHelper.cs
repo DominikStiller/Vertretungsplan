@@ -2,6 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Linq;
+using System.Security.Claims;
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -100,22 +101,23 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
         }
 
         // Use md5-hashed date, last updated and version of all dates as ETag content
-        public string GenerateETagAll()
+        public string GenerateETagAll(string username)
         {
             var tag = cache.GetAll().Aggregate("", (text, vp) =>
             {
-                return text + GenerateETagSingle(vp, false);
+                return text + GenerateETagSingle(vp, username, false);
             });
             return Hash(tag);
         }
 
-        public string GenerateETagSingle(Vertretungsplan vp, bool hash)
+        public string GenerateETagSingle(Vertretungsplan vp, string username, bool hash)
         {
             var tag = vp.Date.ToString(DATEFORMAT_INTERNAL)
                 + vp.LastUpdated.ToString()
                 + TimespanInWords(VertretungsplanTime.Now - vp.LastUpdated)
                 + vp.Version
-                + cache.GetAllDates().Aggregate("", (all, date) => all += date.ToString(DATEFORMAT_INTERNAL));
+                + cache.GetAllDates().Aggregate("", (all, date) => all += date.ToString(DATEFORMAT_INTERNAL))
+                + username;
             return hash ? Hash(tag) : tag;
         }
 

@@ -1,0 +1,26 @@
+﻿@model DominikStiller.VertretungsplanServer.Models.User
+
+@{
+    ViewData["Title"] = "Vertretungsplan des GUS";
+}
+
+<header id="loginpage-header">
+    <a href="http://www.gymnasium-unterrieden.de/"><img src="/images/logo_gus.png" id="guslogo" alt="Logo des Gymnasium Unterrieden Sindelfingen"></a>
+</header>
+<div class="running-text">
+    <h1>Online-Vertretungsplan des GUS</h1>
+    <p>Herzlich willkommen auf dem Online-Vertretungsplan des Gymnasium Unterrieden Sindelfingen.</p>
+    <p>Bitte melden Sie sich an.</p>
+    <br />
+    <form action="/" method="post" id="loginform">
+        @if (ViewData.ContainsKey("Error"))
+        {
+            <p id="login-error">Ungültige Anmeldedaten. Bitte überprüfen sie den Benutzernamen und das Passwort.</p>
+        }
+        <label asp-for="Username">Benutzer:</label><input asp-for="Username" required />
+        <br />
+        <label asp-for="Password">Passwort:</label><input asp-for="Password" required />
+        <br />
+        <button type="submit">Anmelden</button>
+    </form>
+</div>

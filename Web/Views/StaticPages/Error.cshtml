@@ -8,9 +8,13 @@
 
 <div class="message">
     <div>Es ist ein Fehler aufgetreten (Code @Model.StatusCode).</div>
-    @if (Model.StatusCode == 404)
+    @if (Model.StatusCode == 403)
     {
-        <text>Die Seite konnte nicht gefunden werden.</text>
+        <text>Sie dürfen auf diese Seite nicht zugreifen.</text>
+    }
+    else if (Model.StatusCode == 404)
+    {
+    <text>Die Seite konnte nicht gefunden werden.</text>
     }
     else if (Model.StatusCode >= 500 & Model.StatusCode < 600)
     {

@@ -19,6 +19,45 @@ body {
    background-color: $body-color;
 }
 
+nav {
+   width: 100%;
+   color: #fff;
+   height: $navbar-height;
+   background-color: #555;
+   display: flex;
+   @include not-selectable();
+
+   > * {
+      line-height: $navbar-height;
+   }
+
+   .active {
+      font-weight: bold;
+   }
+
+   a {
+      text-decoration: none;
+      color: #fff;
+
+      &:hover {
+         background-color: #777;
+      }
+   }
+
+   #logout {
+      margin-left: auto;
+
+      #logout-icon {
+         height: 16px;
+         color: white;
+         vertical-align: middle;
+         position: relative;
+         top: -1px;
+         margin-right: 3px;
+      }
+   }
+}
+
 footer,
 main {
    max-width: 1250px;
@@ -216,5 +255,53 @@ a {
       text-decoration: none;
       font-weight: bold;
       overflow-wrap: break-word;
+   }
+}
+
+#loginpage-header {
+   min-height: 0;
+}
+
+#loginform {
+
+   #login-error {
+      color: red;
+   }
+
+   label {
+      display: inline-block;
+      width: 90px;
+   }
+
+   input {
+      display: inline-block;
+      padding: 0.5em;
+      margin-bottom: 1em;
+      border: 1px solid #cacaca;
+      font-size: 1rem;
+      transition: border .2s;
+
+      &:focus {
+         outline: none;
+         border: 1px solid #aaa;
+      }
+   }
+
+   button {
+      display: inline-block;
+      padding: .8em 2em;
+      border: none;
+      font-size: .9rem;
+      color: white;
+      background-color: $cyan-blue;
+      outline: none;
+      @media(min-width: 331px) {
+         margin-left: 90px;
+      }
+      transition: background-color .2s;
+
+      &:hover {
+         background-color: darken($cyan-blue, 5);
+      }
    }
 }

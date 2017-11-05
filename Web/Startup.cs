@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Globalization;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -48,8 +50,25 @@ namespace DominikStiller.VertretungsplanServer.Web
                 });
 
             services.AddMvc();
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/";
+                    options.LogoutPath = "/logout";
+                    // Workaround to prevent redirect if access is denied
+                    options.Events = new CookieAuthenticationEvents
+                    {
+                        OnRedirectToAccessDenied = (ctx) =>
+                        {
+                            ctx.Response.StatusCode = 403;
+                            return Task.CompletedTask;
+                        }
+                    };
+                });
+            services.AddAuthorization();
 
             services.AddSingleton<VertretungsplanRepository, VertretungsplanRepository>();
+            services.AddSingleton<UserRepository, UserRepository>();
             services.AddSingleton<DataLoader, DataLoader>();
             services.AddSingleton<VertretungsplanHelper, VertretungsplanHelper>();
             services.AddScoped<ResponseCachingHelper, ResponseCachingHelper>();
@@ -57,9 +76,11 @@ namespace DominikStiller.VertretungsplanServer.Web
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, DataLoader dataLoader)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, UserRepository userRepository, DataLoader dataLoader)
         {
             app.UseStatusCodePagesWithReExecute("/error");
+
+            app.UseAuthentication();
 
             if (env.IsDevelopment())
             {
@@ -90,6 +111,10 @@ namespace DominikStiller.VertretungsplanServer.Web
                 }
             });
             app.UseMvc();
+
+            var userRepositoryConfigSection = Configuration.GetSection("UserRepository");
+            userRepository.LoadUsers(userRepositoryConfigSection.GetValue<string>("StudentsAuthDataPath"), UserType.Student);
+            userRepository.LoadUsers(userRepositoryConfigSection.GetValue<string>("TeachersAuthDataPath"), UserType.Teacher);
 
             dataLoader.Start();
         }

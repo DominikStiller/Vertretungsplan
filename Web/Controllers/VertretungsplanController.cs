@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -25,10 +26,11 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
             this.cachingHelper = cachingHelper;
         }
 
-        [Route("/")]
+        [Route("/students")]
+        [Authorize(Roles = "Student,Teacher")]
         public IActionResult Students()
         {
-            var result = cachingHelper.UseETag(helper.GenerateETagAll());
+            var result = cachingHelper.UseETag(helper.GenerateETagAll(User.Identity.Name));
             if (result == null)
             {
                 var nearest = cache.FindNearest(VertretungsplanTime.Now);
@@ -39,12 +41,13 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
         }
 
         [Route("/ajax/students/{date}")]
+        [Authorize(Roles = "Student,Teacher")]
         public IActionResult StudentsAjax(DateTime date)
         {
             if (cache.Contains(date))
             {
                 var vertretungsplan = cache.Find(date);
-                var tag = helper.GenerateETagSingle(vertretungsplan, true);
+                var tag = helper.GenerateETagSingle(vertretungsplan, User.Identity.Name, true);
                 return cachingHelper.UseETag(tag) ?? PartialView("Students", helper.GenerateViewModel(VertretungsplanType.Students, vertretungsplan));
             }
             else
@@ -53,10 +56,11 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
             }
         }
 
-        [Route("/lehrer")]
+        [Route("/teachers")]
+        [Authorize(Roles = "Teacher")]
         public IActionResult Teachers()
         {
-            var result = cachingHelper.UseETag(helper.GenerateETagAll());
+            var result = cachingHelper.UseETag(helper.GenerateETagAll(User.Identity.Name));
             if (result == null)
             {
                 var nearest = cache.FindNearest(VertretungsplanTime.Now);
@@ -67,12 +71,13 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
         }
 
         [Route("/ajax/teachers/{date}")]
+        [Authorize(Roles = "Teacher")]
         public IActionResult TeachersAjax(DateTime date)
         {
             if (cache.Contains(date))
             {
                 var vertretungsplan = cache.Find(date);
-                var tag = helper.GenerateETagSingle(vertretungsplan, true);
+                var tag = helper.GenerateETagSingle(vertretungsplan, User.Identity.Name, true);
                 return cachingHelper.UseETag(tag) ?? PartialView("Teachers", helper.GenerateViewModel(VertretungsplanType.Teachers, vertretungsplan));
             }
             else
