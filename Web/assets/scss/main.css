@@ -258,6 +258,10 @@ a {
 
 #loginform label {
   display: inline-block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 #loginform #username-label, #loginform #password-label {

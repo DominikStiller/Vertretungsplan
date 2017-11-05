@@ -270,6 +270,7 @@ a {
 
    label {
       display: inline-block;
+      @include not-selectable();
    }
 
    #username-label, #password-label {
