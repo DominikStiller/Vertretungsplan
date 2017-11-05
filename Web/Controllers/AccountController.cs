@@ -23,7 +23,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
         [Route("/")]
         public IActionResult Login()
         {
-            if(HttpContext.User.Identity.IsAuthenticated)
+            if (HttpContext.User.Identity.IsAuthenticated)
             {
                 if (HttpContext.User.IsInRole("Student"))
                     return Redirect("/students");

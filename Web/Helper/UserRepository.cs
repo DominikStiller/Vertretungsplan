@@ -17,8 +17,8 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
 
         public User Authenticate(string username, string password)
         {
-            return UserList.FirstOrDefault(
-                user => user.Username == username
+            return UserList.FirstOrDefault(user =>
+                user.Username == username
                 && user.Password == password
             );
         }
