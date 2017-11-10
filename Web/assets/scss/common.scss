@@ -309,10 +309,12 @@ a {
    input[type=checkbox] {
       width: 1.2em;
       height: 1.2em;
+      background-color: white;
       @include no-default-appearance();
 
       &:checked {
-         background-color: $cyan-blue;
+         background: white url("/icons/checkmark.svg");
+         background-size: contain;
       }
    }
 

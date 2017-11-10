@@ -300,12 +300,14 @@ a {
 #loginform input[type=checkbox] {
   width: 1.2em;
   height: 1.2em;
+  background-color: white;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
 #loginform input[type=checkbox]:checked {
-  background-color: #438bb1;
+  background: white url("/icons/checkmark.svg");
+  background-size: contain;
 }
 
 #loginform button {
