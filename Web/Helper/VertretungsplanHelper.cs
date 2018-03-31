@@ -35,20 +35,33 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
                 if (type == VertretungsplanType.Teachers)
                 {
                     model.Entries = vertretungsplan.Entries
-                        // Only show substitutions that are assigned to a teacher
-                        .FindAll(e => e.SubstitutionTeacher != "entfällt")
-                        .FindAll(e => e.SubstitutionTeacher != "—")
                         // Change order of salutation and name
                         .Select(e =>
                         {
                             Entry newEntry = e.Clone();
-                            if (e.SubstitutionTeacher.StartsWith("Frau "))
+                            if (e.SubstitutionTeacher == "—" || e.SubstitutionTeacher == "entfällt")
                             {
-                                newEntry.SubstitutionTeacher = e.SubstitutionTeacher.Substring(5) + ", Frau";
+                                newEntry.SubstitutionTeacher = e.OriginalTeacher;
+                                newEntry.OriginalTeacher = "—";
                             }
-                            else if (e.SubstitutionTeacher.StartsWith("Herr "))
+                            if (e.SubstitutionTeacher == "entfällt")
                             {
-                                newEntry.SubstitutionTeacher = e.SubstitutionTeacher.Substring(5) + ", Herr";
+                                if (e.Note == "—")
+                                {
+                                    newEntry.Note = "entfällt";
+                                }
+                                else
+                                {
+                                    newEntry.Note = "entfällt, " + e.Note;
+                                }
+                            }
+                            if (newEntry.SubstitutionTeacher.StartsWith("Frau "))
+                            {
+                                newEntry.SubstitutionTeacher = newEntry.SubstitutionTeacher.Substring(5) + ", Frau";
+                            }
+                            else if (newEntry.SubstitutionTeacher.StartsWith("Herr "))
+                            {
+                                newEntry.SubstitutionTeacher = newEntry.SubstitutionTeacher.Substring(5) + ", Herr";
                             }
                             return newEntry;
                         })
