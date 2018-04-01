@@ -2,7 +2,6 @@
 using System.Security.Cryptography;
 using System.Text;
 using System.Linq;
-using System.Security.Claims;
 
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -35,10 +34,10 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
                 if (type == VertretungsplanType.Teachers)
                 {
                     model.Entries = vertretungsplan.Entries
-                        // Change order of salutation and name
                         .Select(e =>
                         {
                             Entry newEntry = e.Clone();
+                            // Fix cancelled lessons and changed rooms
                             if (e.SubstitutionTeacher == "—" || e.SubstitutionTeacher == "entfällt")
                             {
                                 newEntry.SubstitutionTeacher = e.OriginalTeacher;
@@ -55,6 +54,7 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
                                     newEntry.Note = "entfällt, " + e.Note;
                                 }
                             }
+                            // Change order of salutation and name
                             if (newEntry.SubstitutionTeacher.StartsWith("Frau "))
                             {
                                 newEntry.SubstitutionTeacher = newEntry.SubstitutionTeacher.Substring(5) + ", Frau";
