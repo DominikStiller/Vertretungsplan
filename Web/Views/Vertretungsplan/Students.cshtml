@@ -35,7 +35,7 @@
         <a href="http://www.gymnasium-unterrieden.de/"><img src="/images/logo_gus.png" id="guslogo" alt="Logo des Gymnasium Unterrieden Sindelfingen"></a>
     </header>
     <section id="data">
-        @if (Vertretungsplan.Entries.Count > 0)
+        @if (Model.Entries.Count > 0)
         {
             <table>
                 <thead>
@@ -51,7 +51,7 @@
                 </thead>
                 <tbody>
                     <tr class="colorstripe"><td colspan="7"></td></tr>
-                    @foreach (var entry in Vertretungsplan.Entries)
+                    @foreach (var entry in Model.Entries)
                     {
                         <tr>
                             <td>

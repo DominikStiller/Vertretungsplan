@@ -4,6 +4,7 @@ using System.Text;
 using System.Linq;
 
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Options;
 
 using DominikStiller.VertretungsplanServer.Models;
 using DominikStiller.VertretungsplanServer.Web.Controllers;
@@ -17,10 +18,12 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
         const string DATEFORMAT_PUBLIC = "dddd, dd.MM.";
 
         readonly VertretungsplanRepository cache;
+        readonly ViewOptions viewOptions;
 
-        public VertretungsplanHelper(VertretungsplanRepository cache)
+        public VertretungsplanHelper(VertretungsplanRepository cache, IOptions<ViewOptions> viewOptions)
         {
             this.cache = cache;
+            this.viewOptions = viewOptions.Value;
         }
 
         public VertretungsplanViewModel GenerateViewModel(VertretungsplanType type, Vertretungsplan vertretungsplan)
@@ -31,9 +34,18 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
 
             if (vertretungsplan != null)
             {
+                model.Entries = vertretungsplan.Entries;
+                // Filter hidden classes and teachers
+                model.Entries = model.Entries
+                    .Where(e => !(viewOptions.HiddenForms.Contains(e.Form)
+                                    || viewOptions.HiddenTeachers.Contains(e.OriginalTeacher)
+                                    || viewOptions.HiddenTeachers.Contains(e.SubstitutionTeacher)))
+                    .ToList();
+
+                // Change display for teacher page
                 if (type == VertretungsplanType.Teachers)
                 {
-                    model.Entries = vertretungsplan.Entries
+                    model.Entries = model.Entries
                         .Select(e =>
                         {
                             Entry newEntry = e.Clone();

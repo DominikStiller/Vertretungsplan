@@ -103,4 +103,10 @@ namespace DominikStiller.VertretungsplanServer.Web.Controllers
         public string DateformatInternal { get; set; }
         public string DateformatPublic { get; set; }
     }
+
+    public class ViewOptions
+    {
+        public List<string> HiddenForms { get; set; }
+        public List<string> HiddenTeachers { get; set; }
+    }
 }

@@ -19,6 +19,7 @@ using WebMarkupMin.AspNet.Common.Compressors;
 using DominikStiller.VertretungsplanServer.Models;
 using DominikStiller.VertretungsplanServer.Web.Helper;
 using DominikStiller.VertretungsplanServer.Helper;
+using DominikStiller.VertretungsplanServer.Web.Controllers;
 
 namespace DominikStiller.VertretungsplanServer.Web
 {
@@ -37,6 +38,7 @@ namespace DominikStiller.VertretungsplanServer.Web
 
             services.AddOptions();
             services.Configure<DataLoaderOptions>(Configuration.GetSection("DataLoader"));
+            services.Configure<ViewOptions>(Configuration.GetSection("View"));
             services.Configure<ForwardedHeadersOptions>(options =>
             {
                 // Requests through Chrome Data Saver cause "Parameter count mismatch between X-Forwarded-For and X-Forwarded-Proto" if true
