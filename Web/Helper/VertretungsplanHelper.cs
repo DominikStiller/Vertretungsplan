@@ -35,16 +35,10 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
             if (vertretungsplan != null)
             {
                 model.Entries = vertretungsplan.Entries;
-                // Filter hidden classes and teachers
-                model.Entries = model.Entries
-                    .Where(e => !(viewOptions.HiddenForms.Contains(e.Form)
-                                    || viewOptions.HiddenTeachers.Contains(e.OriginalTeacher)
-                                    || viewOptions.HiddenTeachers.Contains(e.SubstitutionTeacher)))
-                    .ToList();
 
-                // Change display for teacher page
                 if (type == VertretungsplanType.Teachers)
                 {
+                    // Change display for teacher page
                     model.Entries = model.Entries
                         .Select(e =>
                         {
@@ -79,6 +73,15 @@ namespace DominikStiller.VertretungsplanServer.Web.Helper
                         })
                         .OrderBy(e => e.SubstitutionTeacher)
                         .ThenBy(e => e.Lesson)
+                        .ToList();
+                }
+                else if (type == VertretungsplanType.Students)
+                {
+                    // Filter hidden classes and teachers
+                    model.Entries = model.Entries
+                        .Where(e => !(viewOptions.HiddenForms.Contains(e.Form)
+                                        || viewOptions.HiddenTeachers.Contains(e.OriginalTeacher)
+                                        || viewOptions.HiddenTeachers.Contains(e.SubstitutionTeacher)))
                         .ToList();
                 }
 
