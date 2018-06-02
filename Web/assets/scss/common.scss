@@ -90,6 +90,7 @@ header {
       // Compensate for inline-block spacing
       margin: 0 -4px;
       border-radius: $border-radius;
+      cursor: pointer;
       @include no-default-appearance();
 
       &::-ms-expand {
