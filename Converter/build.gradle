@@ -57,5 +57,5 @@ build.dependsOn buildZip
 
 task deploy(type: Exec) {
    executable = "aws"
-   args = ["lambda", "update-function-code", "--function-name", "Vertretungsplan-Converter", "--zip-file", "fileb://build/distributions/Converter.zip", "--profile=cli"]
+   args = ["lambda", "update-function-code", "--function-name", "Vertretungsplan-Converter", "--zip-file", "fileb://build/distributions/Converter.zip", "--profile=vpgus-deploy"]
 }

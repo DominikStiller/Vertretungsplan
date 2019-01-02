@@ -5,14 +5,13 @@
 #
 # Adapted from http://community.idera.com/powershell/powertips/b/tips/posts/creating-powershell-web-server
 
-Param(
-   [string]$content
-)
-
 # start web server
 $listener = New-Object System.Net.HttpListener
 $listener.Prefixes.Add("http://*:80/")
 $listener.Start()
+
+[void][Reflection.Assembly]::LoadWithPartialName('Microsoft.VisualBasic')
+$content = [Microsoft.VisualBasic.Interaction]::InputBox("Please enter the response body content:", "Content")
 
 try
 {

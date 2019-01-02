@@ -27,7 +27,7 @@ namespace DominikStiller.VertretungsplanServer.Helper
             }
             catch (Exception e)
             {
-                logger.LogError($"ERROR while handling request\n{e}");
+                logger.LogError($"ERROR while handling request for path '{context.Request.Path}'\n{e}");
 
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             }
