@@ -20,6 +20,7 @@ using DominikStiller.VertretungsplanServer.Models;
 using DominikStiller.VertretungsplanServer.Web.Helper;
 using DominikStiller.VertretungsplanServer.Helper;
 using DominikStiller.VertretungsplanServer.Web.Controllers;
+using Microsoft.AspNetCore.Localization;
 
 namespace DominikStiller.VertretungsplanServer.Web
 {
@@ -83,6 +84,13 @@ namespace DominikStiller.VertretungsplanServer.Web
             app.UseStatusCodePagesWithReExecute("/error");
 
             app.UseAuthentication();
+
+            app.UseRequestLocalization(new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("de"),
+                SupportedCultures = new[] { new CultureInfo("de") },
+                SupportedUICultures = new[] { new CultureInfo("de") }
+            });
 
             if (env.IsDevelopment())
             {
