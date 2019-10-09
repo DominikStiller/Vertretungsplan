@@ -42,9 +42,8 @@
                     <tr>
                         <th>Klasse</th>
                         <th>Stunde</th>
-                        <th>Lehrer / Fach</th>
-                        <th>Ersatzlehrer</th>
-                        <th>Fach</th>
+                        <th>statt</th>
+                        <th>Ersatzfach</th>
                         <th>Raum</th>
                         <th>Bemerkung</th>
                     </tr>
@@ -61,10 +60,7 @@
                                 @entry.Lesson.
                             </td>
                             <td>
-                                @entry.OriginalTeacher / @entry.OriginalSubject
-                            </td>
-                            <td>
-                                @entry.SubstitutionTeacher
+                                @entry.OriginalSubject
                             </td>
                             <td>
                                 @entry.SubstitutionSubject
