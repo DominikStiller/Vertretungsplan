@@ -164,7 +164,7 @@ public class Converter {
       entry.lesson = Integer.parseInt(rs.getString("F2").replace(".", ""));
       String[] originalTeacherSubject = rs.getString("F3").split(" / ");
       entry.originalTeacher = originalTeacherSubject[0];
-      entry.originalSubject = originalTeacherSubject[1];
+      entry.originalSubject = originalTeacherSubject.length > 1 ? originalTeacherSubject[1] : "—";
       entry.substitutionTeacher = replaceDot(rs.getString("F4"));
       entry.substitutionSubject = replaceDot(rs.getString("F5"));
       entry.substitutionRoom = replaceDot(rs.getString("F6"));
