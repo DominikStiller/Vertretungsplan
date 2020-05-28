@@ -1,13 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>DominikStiller.VertretungsplanServer.Api</RootNamespace>
     <AssemblyName>DominikStiller.VertretungsplanServer.Api</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.4" />
     <PackageReference Include="AWS.Logger.AspNetCore" Version="2.2.0" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.111.4" />

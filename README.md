@@ -42,9 +42,10 @@ Converter uses Gradle as build system and is the only component written in Java.
 I use NetBeans for development, but any other IDE can be used.
 The Gradle `deploy` task for deployment to AWS Lambda requires the [AWS Command Line Interface](http://docs.aws.amazon.com/cli/latest/userguide/installing.html) to be installed.
 
-### Api and Web (C#/.NET Core 2.1)
+### Api and Web (C#/.NET Core 3.1)
 Api and Web are written in ASP.NET Core for high performance and cross-platform compatibility.
-For development, I use Visual Studio 2017 with the following extensions:
+For development, I use Visual Studio 2019 with the following extensions:
+
 * [BundlerMinifier](https://marketplace.visualstudio.com/items?itemName=MadsKristensen.BundlerMinifier) for minifying CSS and JavaScript files as soon as they have been changed
 * [AWS Toolkit](http://docs.aws.amazon.com/toolkit-for-visual-studio/latest/user-guide/getting-set-up.html) for easy deployment to Amazon EC2 using AWS Elastic Beanstalk
 

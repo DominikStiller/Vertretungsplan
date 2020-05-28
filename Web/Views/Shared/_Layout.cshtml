@@ -36,7 +36,7 @@
 <body>
     @if (Context.User.Identity.IsAuthenticated)
     {
-        @Html.PartialAsync("_MenuBar")
+        @await Html.PartialAsync("_MenuBar")
     }
     <main>
         @RenderBody()

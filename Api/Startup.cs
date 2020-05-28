@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -36,7 +37,7 @@ namespace DominikStiller.VertretungsplanServer.Api
             services.AddSingleton<Notifier, Notifier>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, DataLoader dataLoader)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory, DataLoader dataLoader)
         {
             if (env.IsDevelopment())
             {
@@ -52,9 +53,13 @@ namespace DominikStiller.VertretungsplanServer.Api
                 app.UseRewriter(rewriteOptions);
             }
 
-            app.UseMvc();
+            app.UseRouting();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
-            dataLoader.LoadDataFromS3();
+            _ = dataLoader.LoadDataFromS3();
         }
     }
 }

@@ -7,20 +7,21 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Net.Http.Headers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-using WebMarkupMin.AspNetCore2;
+using WebMarkupMin.AspNetCore3;
 using WebMarkupMin.AspNet.Common.Compressors;
 
 using DominikStiller.VertretungsplanServer.Models;
 using DominikStiller.VertretungsplanServer.Web.Helper;
 using DominikStiller.VertretungsplanServer.Helper;
 using DominikStiller.VertretungsplanServer.Web.Controllers;
-using Microsoft.AspNetCore.Localization;
 
 namespace DominikStiller.VertretungsplanServer.Web
 {
@@ -52,7 +53,7 @@ namespace DominikStiller.VertretungsplanServer.Web
                     options.CompressorFactories = new List<ICompressorFactory> { new GZipCompressorFactory() };
                 });
 
-            services.AddMvc();
+            services.AddRazorPages();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
@@ -79,11 +80,12 @@ namespace DominikStiller.VertretungsplanServer.Web
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, UserRepository userRepository, DataLoader dataLoader)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory, UserRepository userRepository, DataLoader dataLoader)
         {
-            app.UseStatusCodePagesWithReExecute("/error");
 
             app.UseAuthentication();
+
+            app.UseStatusCodePagesWithReExecute("/error");
 
             app.UseRequestLocalization(new RequestLocalizationOptions
             {
@@ -120,7 +122,13 @@ namespace DominikStiller.VertretungsplanServer.Web
                     };
                 }
             });
-            app.UseMvc();
+
+            app.UseRouting();
+            app.UseAuthorization();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             var userRepositoryConfigSection = Configuration.GetSection("UserRepository");
             userRepository.LoadUsers(userRepositoryConfigSection.GetValue<string>("StudentsAuthDataPath"), UserType.Student);
