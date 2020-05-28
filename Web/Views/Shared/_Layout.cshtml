@@ -36,7 +36,7 @@
 <body>
     @if (Context.User.Identity.IsAuthenticated)
     {
-        @Html.Partial("_MenuBar")
+        @Html.PartialAsync("_MenuBar")
     }
     <main>
         @RenderBody()
@@ -45,7 +45,7 @@
     {
         <footer>
             <a href="#" id="jumptotop">&#9650; Nach oben</a>
-            <span id="copyright">&copy;2019 <a href="http://dominikstiller.de/" target="_blank">Dominik Stiller</a> &middot; <a href="/datenschutz">Datenschutz</a></span>
+            <span id="copyright">&copy;2020 <a href="http://dominikstiller.de/" target="_blank">Dominik Stiller</a> &middot; <a href="/datenschutz">Datenschutz</a></span>
         </footer>
     }
 </body>
