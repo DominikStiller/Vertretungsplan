@@ -263,3 +263,6 @@ __pycache__/
 appsettings.*.json
 private/*
 !private/README.md
+
+# Beanstalk Deployment for Visual Studio 
+aws-beanstalk-tools-defaults.json
