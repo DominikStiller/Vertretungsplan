@@ -2,7 +2,7 @@
   {
     "outputFileName": "wwwroot/main.min.css",
     "inputFiles": [
-      "assets/scss/main.css"
+      "assets/scss/build/main.css"
     ]
   },
   {

@@ -1,0 +1,14 @@
+{
+   "version": "2.0.0",
+   "tasks": [
+    {
+      "label": "Sass Compile",
+      "type": "shell",
+      "command": "node-sass assets/scss/main.scss assets/scss/build/main.css",
+      "group": "build",
+      "problemMatcher": [
+        "$node-sass"
+      ]
+    }
+  ]
+ }
